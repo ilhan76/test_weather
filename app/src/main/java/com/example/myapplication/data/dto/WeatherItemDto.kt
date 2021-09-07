@@ -7,7 +7,7 @@ data class WeatherItemDto(
     @SerializedName("main")
     val main: MainDto,
     @SerializedName("weather")
-    val weather: WeatherDto,
+    val weather: List<WeatherDto>,
     @SerializedName("clouds")
     val clouds: CloudsDto,
     @SerializedName("wind")

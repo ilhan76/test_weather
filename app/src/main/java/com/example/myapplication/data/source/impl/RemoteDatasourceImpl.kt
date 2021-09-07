@@ -17,6 +17,7 @@ class RemoteDatasourceImpl: RemoteDatasource {
                     latitude = 51.5073, longitude = -0.1277, appid = "0b0f9f5b54968d5ad5c5788c304286f3", language = "ru"
                 )
             } catch (e: Exception){
+                Log.d(TAG, "getWeatherListAsync: ${e.localizedMessage}")
                 return@async ListWeatherResponse(-1, e.localizedMessage, null, null)
             }
         }

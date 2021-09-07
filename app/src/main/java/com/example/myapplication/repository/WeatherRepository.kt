@@ -5,5 +5,5 @@ import com.example.myapplication.net.response.RepositoryResponse
 import kotlinx.coroutines.flow.Flow
 
 interface WeatherRepository {
-    fun getFiveDayWeatherAsync() : Flow<RepositoryResponse<List<WeatherItemDomain>>>
+    fun getFiveDayWeather() : Flow<RepositoryResponse<List<WeatherItemDomain>>>
 }
