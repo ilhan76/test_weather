@@ -15,9 +15,9 @@ data class WeatherItemDto(
     @SerializedName("pop")
     val pop: Double, // Probability of precipitation
     @SerializedName("rain")
-    val rain: RainDto,
+    val rain: RainDto?,
     @SerializedName("snow")
-    val snow: SnowDto,
+    val snow: SnowDto?,
     @SerializedName("sys")
     val sys: SysDto,
     @SerializedName("city")

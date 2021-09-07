@@ -1,8 +1,11 @@
 package com.example.myapplication.net
 
+import com.example.myapplication.net.response.ListWeatherResponse
 import com.example.myapplication.util.addJsonConvertor
 import com.example.myapplication.util.setClient
 import retrofit2.Retrofit
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiService {
     companion object{
@@ -16,4 +19,12 @@ interface ApiService {
                 .build()
                 .create(ApiService::class.java)
     }
+
+    @GET("forecast/")
+    suspend fun getListWeather(
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double,
+        @Query("appid") appid: String,
+        @Query("lang") language: String
+    ): ListWeatherResponse
 }

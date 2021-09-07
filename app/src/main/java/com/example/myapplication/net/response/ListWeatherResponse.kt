@@ -8,9 +8,9 @@ data class ListWeatherResponse(
     @SerializedName("cod")
     val cod: Int,
     @SerializedName("message")
-    val message: String,
+    val message: String?,
     @SerializedName("list")
-    val list: List<WeatherItemDto>,
+    val list: List<WeatherItemDto>?,
     @SerializedName("city")
-    val city: CityDto
+    val city: CityDto?
 )
