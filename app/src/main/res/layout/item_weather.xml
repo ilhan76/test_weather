@@ -8,8 +8,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
         android:background="@drawable/shape_item_bg"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

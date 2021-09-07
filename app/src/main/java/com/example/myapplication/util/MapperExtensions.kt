@@ -1,7 +1,10 @@
 package com.example.myapplication.util
 
+import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.data.domain.WeatherItemDomain
 import com.example.myapplication.data.dto.WeatherItemDto
+import com.example.myapplication.net.response.HourlyWeatherItem
+import java.util.*
 
 fun WeatherItemDto.toDomain() = WeatherItemDomain(
     tempMax = main.tempMax,
@@ -19,3 +22,15 @@ fun WeatherItemDto.toDomain() = WeatherItemDomain(
     snowVolume = snow?.snowVolume,
     partOfDay = sys.pod
 )
+
+fun HourlyWeatherItem.toDomain() = HourlyWeatherItemDomain(
+    time = unixToIso(dt),
+    iconUrl = "http://openweathermap.org/img/wn/${weather.first().icon}@2x.png",
+    temp = temp
+)
+
+private fun unixToIso(unixTime: Long): String {
+    val sdf = java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    val date = java.util.Date(unixTime * 1000)
+    return sdf.format(date)
+}

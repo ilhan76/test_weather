@@ -8,12 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
+import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.data.domain.WeatherItemDomain
 import com.example.myapplication.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
 
+    private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -29,11 +30,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun init(){
-        viewModel.weatherLiveData.observe(viewLifecycleOwner, this::render)
-        viewModel.loadWeather()
+        Log.d(TAG, "init: Init")
+        viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::render)
+        viewModel.loadHourlyWeather()
     }
 
-    private fun render(weatherItemsDomain: List<WeatherItemDomain>){
+    private fun render(weatherItemsDomain: List<HourlyWeatherItemDomain>){
         Toast.makeText(requireContext(), "Gjkexbkb", Toast.LENGTH_SHORT).show()
     }
 
