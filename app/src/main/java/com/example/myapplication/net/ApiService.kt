@@ -1,5 +1,6 @@
 package com.example.myapplication.net
 
+import com.example.myapplication.net.response.CurrentWeatherResponse
 import com.example.myapplication.net.response.HourlyListWeatherResponse
 import com.example.myapplication.net.response.ListWeatherResponse
 import com.example.myapplication.util.addJsonConvertor
@@ -21,13 +22,14 @@ interface ApiService {
                 .create(ApiService::class.java)
     }
 
-    @GET("forecast/")
-    suspend fun getListWeather(
+    @GET("onecall")
+    suspend fun getCurrentWeather(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
+        @Query("lang") language: String,
         @Query("appid") appid: String,
-        @Query("lang") language: String
-    ): ListWeatherResponse
+        @Query("units") units: String
+    ) : CurrentWeatherResponse
 
     @GET("onecall")
     suspend fun getHourlyListWeather(

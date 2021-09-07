@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">My Application</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="degr_pattern">%d° C</string>
+
+    <string name="feels_like">Чувствуется как 38° C</string>
+    <string name="wind_pattern">Wind: %dm/s</string>
+    <string name="humidity_pattern">Humidity: %dPer</string>
+    <string name="uv_index_pattern">UV index: %s</string>
+    <string name="pressure_pattern">Pressure: %shPa</string>
+    <string name="visibility_pattern">Visibility: %skm</string>
 </resources>

@@ -11,7 +11,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="70dp"
-        android:background="@color/gray"
         app:layout_constraintEnd_toStartOf="@+id/txt_main"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,40 +21,41 @@
         android:id="@+id/txt_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:text="Ясное небо"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/txt_description"
         app:layout_constraintStart_toEndOf="@+id/main_weather_icon"
-        app:layout_constraintTop_toTopOf="@+id/main_weather_icon" />
+        app:layout_constraintTop_toTopOf="@+id/main_weather_icon"
+        tools:text="Ясное небо" />
 
     <TextView
         android:id="@+id/txt_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Легкий ветер"
         app:layout_constraintStart_toStartOf="@+id/txt_main"
-        app:layout_constraintTop_toBottomOf="@+id/txt_main" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_main"
+        app:layout_constraintBottom_toBottomOf="@+id/main_weather_icon"
+        tools:text="Легкий ветер" />
 
     <TextView
-        android:id="@+id/temp"
+        android:id="@+id/txt_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="30° C"
         android:textColor="@color/black"
         android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_weather_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/main_weather_icon"
+        tools:text="@string/degr_pattern" />
 
     <TextView
         android:id="@+id/txt_feels_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Чувствуется как 38° C"
-        app:layout_constraintEnd_toEndOf="@+id/temp"
-        app:layout_constraintStart_toStartOf="@+id/temp"
-        app:layout_constraintTop_toBottomOf="@+id/temp" />
+        android:text="@string/feels_like"
+        app:layout_constraintEnd_toEndOf="@+id/txt_temp"
+        app:layout_constraintStart_toStartOf="@+id/txt_temp"
+        app:layout_constraintTop_toBottomOf="@+id/txt_temp" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/title_section_bottom_barrier"
@@ -63,7 +63,7 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="main_weather_icon, txt_main, txt_description, temp, txt_feels_like" />
+        app:constraint_referenced_ids="main_weather_icon, txt_main, txt_description, txt_temp, txt_feels_like" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow"
@@ -72,7 +72,7 @@
         android:layout_marginHorizontal="5dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/shape_flow_bg"
-        app:constraint_referenced_ids="wind, humidity, uv_index, pressure, visibility"
+        app:constraint_referenced_ids="txt_wind, txt_humidity, txt_uv_index, txt_pressure, txt_visibility"
         app:flow_firstHorizontalStyle="spread"
         app:flow_horizontalGap="10dp"
         app:flow_verticalGap="10dp"
@@ -83,45 +83,45 @@
         app:layout_constraintTop_toBottomOf="@+id/title_section_bottom_barrier" />
 
     <TextView
-        android:id="@+id/wind"
+        android:id="@+id/txt_wind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:text="Wind: m/s"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="@string/wind_pattern" />
 
     <TextView
-        android:id="@+id/humidity"
+        android:id="@+id/txt_humidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Humidity: %"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="@string/humidity_pattern" />
 
     <TextView
-        android:id="@+id/uv_index"
+        android:id="@+id/txt_uv_index"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="UV index: "
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="@string/uv_index_pattern" />
 
     <TextView
-        android:id="@+id/pressure"
+        android:id="@+id/txt_pressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pressure: hPa"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="@string/pressure_pattern" />
 
     <TextView
-        android:id="@+id/visibility"
+        android:id="@+id/txt_visibility"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Visibility: km"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="@string/visibility_pattern" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_current_day"

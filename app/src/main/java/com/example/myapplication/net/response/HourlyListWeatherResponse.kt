@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class HourlyListWeatherResponse(
     @SerializedName("hourly")
-    val hourly: List<HourlyWeatherItem>?,
+    val hourly: List<HourlyWeatherItemDto>?,
     val message: String?
 )
 
-data class HourlyWeatherItem(
+data class HourlyWeatherItemDto(
     @SerializedName("dt")
     val dt: Long,
     @SerializedName("temp")

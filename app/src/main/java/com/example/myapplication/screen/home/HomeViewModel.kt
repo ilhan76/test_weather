@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.data.domain.CurrentWeatherDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.data.domain.WeatherItemDomain
 import com.example.myapplication.data.source.impl.RemoteDatasourceImpl
@@ -27,22 +28,25 @@ class HomeViewModel(private val context: Application): AndroidViewModel(context)
     private val _hourlyWeatherLiveData = MutableLiveData<List<HourlyWeatherItemDomain>>()
     val hourlyWeatherLiveData: LiveData<List<HourlyWeatherItemDomain>> = _hourlyWeatherLiveData
 
-/*    fun loadWeather(){
+    private val _currentWeatherLiveData = MutableLiveData<CurrentWeatherDomain>()
+    val currentWeatherLiveData: LiveData<CurrentWeatherDomain> = _currentWeatherLiveData
+
+    fun loadCurrentWeather(){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
-                repository.getFiveDayWeather()
+                repository.getCurrentWeather()
                     .onEach {
                         if (it.content != null){
                             withContext(Dispatchers.Main){
-                                _hourlyWeatherLiveData.postValue(it.content!!)
+                                _currentWeatherLiveData.postValue(it.content!!)
                             }
-                        } else{
-                            Log.d(TAG, "loadWeather: Error ${it.message}")
+                        } else {
+                            Log.d(TAG, "loadCurrentWeather: Error")
                         }
                     }.collect()
             }
         }
-    }*/
+    }
 
     fun loadHourlyWeather(){
         viewModelScope.launch {

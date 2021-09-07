@@ -1,13 +1,14 @@
 package com.example.myapplication.util
 
-import com.bumptech.glide.Glide
+import com.example.myapplication.data.domain.CurrentWeatherDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.data.domain.WeatherItemDomain
 import com.example.myapplication.data.dto.WeatherItemDto
-import com.example.myapplication.net.response.HourlyWeatherItem
+import com.example.myapplication.net.response.CurrentDto
+import com.example.myapplication.net.response.HourlyWeatherItemDto
 import java.util.*
 
-fun WeatherItemDto.toDomain() = WeatherItemDomain(
+/*fun WeatherItemDto.toDomain() = WeatherItemDomain(
     tempMax = main.tempMax,
     tempMin = main.tempMin,
     pressure = main.pressure,
@@ -22,12 +23,25 @@ fun WeatherItemDto.toDomain() = WeatherItemDomain(
     rainVolume = rain?.rainVolume,
     snowVolume = snow?.snowVolume,
     partOfDay = sys.pod
-)
+)*/
 
-fun HourlyWeatherItem.toDomain() = HourlyWeatherItemDomain(
+fun HourlyWeatherItemDto.toDomain() = HourlyWeatherItemDomain(
     time = unixToIso(dt),
     iconUrl = "http://openweathermap.org/img/wn/${weather.first().icon}@2x.png",
     temp = temp
+)
+
+fun CurrentDto.toDomain() = CurrentWeatherDomain(
+    temp = temp.toInt(),
+    feelsLike = feelsLike.toInt(),
+    windSpeed = windSpeed.toInt(),
+    humidity = humidity,
+    uvi = uvi,
+    pressure = pressure,
+    visibility = visibility,
+    main = weather.first().main,
+    description = weather.first().description,
+    iconUrl = "http://openweathermap.org/img/wn/${weather.first().icon}@2x.png"
 )
 
 private fun unixToIso(unixTime: Long): String {
