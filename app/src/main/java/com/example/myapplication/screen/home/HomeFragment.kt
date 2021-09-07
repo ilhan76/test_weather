@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import com.example.myapplication.adapters.HourlyWeatherAdapter
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.data.domain.WeatherItemDomain
 import com.example.myapplication.databinding.FragmentHomeBinding
@@ -20,6 +21,8 @@ class HomeFragment : Fragment() {
 
     private val viewModel by viewModels<HomeViewModel>()
 
+    private val hourlyAdapter: HourlyWeatherAdapter = HourlyWeatherAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,11 +34,15 @@ class HomeFragment : Fragment() {
 
     private fun init(){
         Log.d(TAG, "init: Init")
+
+        binding.rvCurrentDay.adapter = hourlyAdapter
+
         viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::render)
         viewModel.loadHourlyWeather()
     }
 
     private fun render(weatherItemsDomain: List<HourlyWeatherItemDomain>){
+        hourlyAdapter.setList(weatherItemsDomain)
         Toast.makeText(requireContext(), "Gjkexbkb", Toast.LENGTH_SHORT).show()
     }
 

@@ -1,5 +1,6 @@
 package com.example.myapplication.util
 
+import com.bumptech.glide.Glide
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.data.domain.WeatherItemDomain
 import com.example.myapplication.data.dto.WeatherItemDto
@@ -31,6 +32,7 @@ fun HourlyWeatherItem.toDomain() = HourlyWeatherItemDomain(
 
 private fun unixToIso(unixTime: Long): String {
     val sdf = java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-    val date = java.util.Date(unixTime * 1000)
-    return sdf.format(date)
+    val date = Date(unixTime * 1000)
+    val iso = sdf.format(date)
+    return iso.substring(11, 16)
 }
