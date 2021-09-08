@@ -142,6 +142,31 @@
         android:textSize="16sp"
         tools:text="@string/visibility_pattern" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_rv_current_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flow">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <include layout="@layout/shimmer_hourly_weather"/>
+            <include layout="@layout/shimmer_hourly_weather"/>
+            <include layout="@layout/shimmer_hourly_weather"/>
+            <include layout="@layout/shimmer_hourly_weather"/>
+            <include layout="@layout/shimmer_hourly_weather"/>
+            <include layout="@layout/shimmer_hourly_weather"/>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_current_day"
         android:layout_width="match_parent"
@@ -153,6 +178,29 @@
         app:layout_constraintTop_toBottomOf="@+id/flow"
         tools:listitem="@layout/item_hourly_weather" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_rv_next_days"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_current_day">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <include layout="@layout/shimmer_daily_weather"/>
+            <include layout="@layout/shimmer_daily_weather"/>
+            <include layout="@layout/shimmer_daily_weather"/>
+            <include layout="@layout/shimmer_daily_weather"/>
+            <include layout="@layout/shimmer_daily_weather"/>
+            <include layout="@layout/shimmer_daily_weather"/>
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_next_days"
         android:layout_width="match_parent"
@@ -163,6 +211,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_current_day"
-        tools:listitem="@layout/item_daily_weather" />
+        tools:listitem="@layout/item_daily_weather"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
