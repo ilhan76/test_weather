@@ -80,8 +80,6 @@ class HomeFragment : Fragment() {
 
         viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::renderHourlyWeather)
         viewModel.currentWeatherLiveData.observe(viewLifecycleOwner, this::renderCurrentWeather)
-        //viewModel.loadCurrentWeather()
-        //viewModel.loadHourlyWeather()
     }
 
     override fun onRequestPermissionsResult(
