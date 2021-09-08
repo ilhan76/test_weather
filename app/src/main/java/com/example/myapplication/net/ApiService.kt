@@ -2,7 +2,6 @@ package com.example.myapplication.net
 
 import com.example.myapplication.net.response.CurrentWeatherResponse
 import com.example.myapplication.net.response.HourlyListWeatherResponse
-import com.example.myapplication.net.response.ListWeatherResponse
 import com.example.myapplication.util.addJsonConvertor
 import com.example.myapplication.util.setClient
 import retrofit2.Retrofit
@@ -22,7 +21,7 @@ interface ApiService {
                 .create(ApiService::class.java)
     }
 
-    @GET("onecall")
+    @GET("onecall?exclude=minutely,hourly,daily,alerts")
     suspend fun getCurrentWeather(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
@@ -31,7 +30,7 @@ interface ApiService {
         @Query("units") units: String
     ) : CurrentWeatherResponse
 
-    @GET("onecall")
+    @GET("onecall?exclude=current,minutely,daily,alerts")
     suspend fun getHourlyListWeather(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
@@ -40,7 +39,7 @@ interface ApiService {
         @Query("units") units: String
     ) : HourlyListWeatherResponse
 
-    @GET("onecall")
+    @GET("onecall?exclude=current,minutely,hourly,alerts")
     suspend fun getDailyListWeather(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
@@ -48,4 +47,6 @@ interface ApiService {
         @Query("appid") appid: String,
         @Query("metric") metric: String
     )
+
+    // @GET("onecall?exclude=current,minutely,hourly,daily,alerts")
 }

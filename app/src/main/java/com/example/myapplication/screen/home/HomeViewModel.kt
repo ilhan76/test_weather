@@ -8,11 +8,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.domain.CurrentWeatherDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
-import com.example.myapplication.data.domain.WeatherItemDomain
 import com.example.myapplication.data.source.impl.RemoteDatasourceImpl
-import com.example.myapplication.net.ApiService
 import com.example.myapplication.repository.WeatherRepository
-import com.example.myapplication.repository.WeatherRepositoryImpl
+import com.example.myapplication.repository.impl.WeatherRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
@@ -31,10 +29,10 @@ class HomeViewModel(private val context: Application): AndroidViewModel(context)
     private val _currentWeatherLiveData = MutableLiveData<CurrentWeatherDomain>()
     val currentWeatherLiveData: LiveData<CurrentWeatherDomain> = _currentWeatherLiveData
 
-    fun loadCurrentWeather(){
+    fun loadCurrentWeather(latitude: Double, longitude: Double){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
-                repository.getCurrentWeather()
+                repository.getCurrentWeather(latitude, longitude)
                     .onEach {
                         if (it.content != null){
                             withContext(Dispatchers.Main){
@@ -48,10 +46,10 @@ class HomeViewModel(private val context: Application): AndroidViewModel(context)
         }
     }
 
-    fun loadHourlyWeather(){
+    fun loadHourlyWeather(latitude: Double, longitude: Double){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
-                repository.getHourlyListWeather()
+                repository.getHourlyListWeather(latitude, longitude)
                     .onEach {
                         if (it.content != null){
                             Log.d(TAG, "loadHourlyWeather: ${it.content}")

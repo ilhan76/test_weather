@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/main_weather_icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="70dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="45dp"
         app:layout_constraintEnd_toStartOf="@+id/txt_main"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,8 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/txt_description"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/main_weather_icon"
         app:layout_constraintTop_toTopOf="@+id/main_weather_icon"
         tools:text="Ясное небо" />
@@ -32,9 +32,9 @@
         android:id="@+id/txt_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/main_weather_icon"
         app:layout_constraintStart_toStartOf="@+id/txt_main"
         app:layout_constraintTop_toBottomOf="@+id/txt_main"
-        app:layout_constraintBottom_toBottomOf="@+id/main_weather_icon"
         tools:text="Легкий ветер" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="60sp"
+        android:textSize="55sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_weather_icon"
@@ -52,10 +52,24 @@
         android:id="@+id/txt_feels_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/feels_like"
         app:layout_constraintEnd_toEndOf="@+id/txt_temp"
         app:layout_constraintStart_toStartOf="@+id/txt_temp"
-        app:layout_constraintTop_toBottomOf="@+id/txt_temp" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_temp"
+        tools:text="@string/feels_like_pattern" />
+
+    <Button
+        android:id="@+id/btn_change_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:backgroundTint="@color/gray"
+        android:text="Change Location"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/title_section_bottom_barrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_feels_like" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/title_section_bottom_barrier"
@@ -63,7 +77,8 @@
         android:layout_height="0dp"
         android:orientation="vertical"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="main_weather_icon, txt_main, txt_description, txt_temp, txt_feels_like" />
+        app:constraint_referenced_ids="main_weather_icon, txt_main,
+         txt_description, txt_temp, txt_feels_like, btn_change_location" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow"

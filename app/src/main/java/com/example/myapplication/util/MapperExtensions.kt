@@ -2,28 +2,9 @@ package com.example.myapplication.util
 
 import com.example.myapplication.data.domain.CurrentWeatherDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
-import com.example.myapplication.data.domain.WeatherItemDomain
-import com.example.myapplication.data.dto.WeatherItemDto
 import com.example.myapplication.net.response.CurrentDto
 import com.example.myapplication.net.response.HourlyWeatherItemDto
 import java.util.*
-
-/*fun WeatherItemDto.toDomain() = WeatherItemDomain(
-    tempMax = main.tempMax,
-    tempMin = main.tempMin,
-    pressure = main.pressure,
-    humidity = main.humidity,
-    mainWeather = weather.first().main,
-    weatherDescription = weather.first().description,
-    iconUrl = "http://openweathermap.org/img/wn/${weather.first().icon}@2x.png",
-    cloudiness = clouds.all,
-    speed = wind.speed,
-    deg = wind.deg,
-    probabilityOfPrecipitation = pop,
-    rainVolume = rain?.rainVolume,
-    snowVolume = snow?.snowVolume,
-    partOfDay = sys.pod
-)*/
 
 fun HourlyWeatherItemDto.toDomain() = HourlyWeatherItemDomain(
     time = unixToIso(dt),
