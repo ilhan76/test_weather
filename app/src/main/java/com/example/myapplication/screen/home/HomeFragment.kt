@@ -1,7 +1,6 @@
 package com.example.myapplication.screen.home
 
 import android.Manifest
-import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.pm.PackageManager
 import android.location.LocationListener
@@ -12,18 +11,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
+import com.example.myapplication.adapters.DailyWeatherAdapter
 import com.example.myapplication.adapters.HourlyWeatherAdapter
 import com.example.myapplication.data.domain.CurrentWeatherDomain
 import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.databinding.FragmentHomeBinding
-import kotlin.math.log
 
 class HomeFragment : Fragment() {
     private val TAG: String = this::class.java.simpleName
@@ -33,6 +30,7 @@ class HomeFragment : Fragment() {
     private val viewModel by viewModels<HomeViewModel>()
 
     private val hourlyAdapter: HourlyWeatherAdapter = HourlyWeatherAdapter()
+    private val dailyAdapter: DailyWeatherAdapter = DailyWeatherAdapter()
 
     private var locationManager: LocationManager? = null
     private val locationListener: LocationListener = LocationListener {
@@ -53,8 +51,18 @@ class HomeFragment : Fragment() {
     private fun init() {
         Log.d(TAG, "init: Init")
 
-       locationManager = requireContext().getSystemService(LOCATION_SERVICE) as LocationManager
+        locationManager = requireContext().getSystemService(LOCATION_SERVICE) as LocationManager
+        checkSelfPermission()
 
+        binding.rvCurrentDay.adapter = hourlyAdapter
+        binding.rvNextDays.adapter = dailyAdapter
+
+        viewModel.currentWeatherLiveData.observe(viewLifecycleOwner, this::renderCurrentWeather)
+        viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::renderHourlyWeather)
+        viewModel.dailyWeatherLiveData.observe(viewLifecycleOwner, this::renderDailyWeather)
+    }
+
+    private fun checkSelfPermission() {
         if (ActivityCompat.checkSelfPermission(
                 requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -77,12 +85,6 @@ class HomeFragment : Fragment() {
                 locationListener
             )
         }
-
-        binding.rvCurrentDay.adapter = hourlyAdapter
-
-        viewModel.currentWeatherLiveData.observe(viewLifecycleOwner, this::renderCurrentWeather)
-        viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::renderHourlyWeather)
-        viewModel.dailyWeatherLiveData.observe(viewLifecycleOwner, this::renderDailyWeather)
     }
 
     private fun renderCurrentWeather(currentWeather: CurrentWeatherDomain) {
@@ -125,12 +127,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun renderHourlyWeather(weatherItemsDomain: List<HourlyWeatherItemDomain>) {
-        hourlyAdapter.setList(weatherItemsDomain)
+    private fun renderHourlyWeather(weatherItems: List<HourlyWeatherItemDomain>) {
+        hourlyAdapter.setList(weatherItems)
     }
 
-    private fun renderDailyWeather(weatherItem: List<DailyWeatherItemDomain>){
-
+    private fun renderDailyWeather(weatherItems: List<DailyWeatherItemDomain>) {
+        dailyAdapter.setList(weatherItems)
     }
 
     override fun onDestroy() {

@@ -9,4 +9,9 @@
     <string name="uv_index_pattern">UV index: %s</string>
     <string name="pressure_pattern">Pressure: %shPa</string>
     <string name="visibility_pattern">Visibility: %skm</string>
+    <string name="daily_temp_pattern">%d / %d °C</string>
+
+    <!-- Home Fragment-->
+    <string name="home_btn_change_location">Change Location</string>
+    <!-- Home Fragment-->
 </resources>

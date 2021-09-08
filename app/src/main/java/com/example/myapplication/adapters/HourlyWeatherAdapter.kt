@@ -9,11 +9,11 @@ import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.databinding.ItemHourlyWeatherBinding
 
 
-class HourlyWeatherAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HourlyWeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val list: MutableList<HourlyWeatherItemDomain> = ArrayList()
 
-    fun setList(newList: List<HourlyWeatherItemDomain>){
+    fun setList(newList: List<HourlyWeatherItemDomain>) {
         list.clear()
         list.addAll(newList)
 
