@@ -1,7 +1,9 @@
 package com.example.myapplication.screen.home
 
 import android.Manifest
+import android.content.Context
 import android.content.Context.LOCATION_SERVICE
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.LocationListener
 import android.location.LocationManager
@@ -13,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.adapters.DailyWeatherAdapter
@@ -23,8 +26,7 @@ import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.screen.detail.ARG_DETAIL_WEATHER
 import com.example.myapplication.screen.detail.DetailFragment
-import com.example.myapplication.util.AppNavigation
-import com.example.myapplication.util.RvDailyWeatherDelegate
+import com.example.myapplication.util.*
 
 class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     private val TAG: String = this::class.java.simpleName
@@ -32,30 +34,27 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<HomeViewModel>()
-    private var appNavigation: AppNavigation? = null
 
     private val hourlyAdapter: HourlyWeatherAdapter = HourlyWeatherAdapter()
     private val dailyAdapter: DailyWeatherAdapter = DailyWeatherAdapter()
 
     private var locationManager: LocationManager? = null
-    private val locationListener: LocationListener = LocationListener {
-        viewModel.loadCurrentWeather(it.latitude, it.longitude)
-        viewModel.loadHourlyWeather(it.latitude, it.longitude)
-        viewModel.loadDailyWeather(it.latitude, it.longitude)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        init()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
     }
 
     private fun init() {
         Log.d(TAG, "init: Init")
-        appNavigation = requireActivity() as AppNavigation
 
         locationManager = requireContext().getSystemService(LOCATION_SERVICE) as LocationManager
         checkSelfPermission()
@@ -67,6 +66,14 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         viewModel.currentWeatherLiveData.observe(viewLifecycleOwner, this::renderCurrentWeather)
         viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::renderHourlyWeather)
         viewModel.dailyWeatherLiveData.observe(viewLifecycleOwner, this::renderDailyWeather)
+
+        binding.btnChangeLocation.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_chooseLocation)
+        }
+
+        viewModel.loadCurrentWeather()
+        viewModel.loadHourlyWeather()
+        viewModel.loadDailyWeather()
     }
 
     private fun checkSelfPermission() {
@@ -84,13 +91,23 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
             )
             ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
         } else {
-            Log.d(TAG, "init: Success")
             locationManager?.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER,
                 0L,
-                10000f,
-                locationListener
-            )
+                10000f
+            ){
+                val pref: SharedPreferences = requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
+                val editor = pref.edit()
+                editor.apply {
+                    putString(PREF_ARG_FLAG, FLAG_GEOLOCATION)
+                    putFloat(PREF_ARG_LAT_GEO, it.longitude.toFloat())
+                    putFloat(PREF_ARG_LAT_GEO, it.latitude.toFloat())
+                }
+                editor.apply()
+                viewModel.loadCurrentWeather()
+                viewModel.loadHourlyWeather()
+                viewModel.loadDailyWeather()
+            }
         }
     }
 
@@ -151,6 +168,6 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     override fun toDetail(weatherItemDomain: DailyWeatherItemDomain?) {
         val bundle =  Bundle()
         bundle.putSerializable(ARG_DETAIL_WEATHER, weatherItemDomain)
-        appNavigation?.toDetail(bundle)
+        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
     }
 }

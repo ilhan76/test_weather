@@ -24,8 +24,12 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
-        init()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
     }
 
     private fun init() {
@@ -90,19 +94,25 @@ class DetailFragment : Fragment() {
 
             if (weather.rain != null || weather.snow != null) {
                 txtPopTitle.isVisible = true
-                txtRainPrecipitation.isVisible = true
-                txtSnowPrecipitation.isVisible = true
 
-                if (weather.rain != null)
+                if (weather.rain != null){
                     txtRainPrecipitation.text = context?.getString(
                         R.string.rain_pattern,
                         weather.rain.toString()
                     )
-                if (weather.snow != null)
+                    txtRainPrecipitation.isVisible = true
+                } else{
+                    txtRainPrecipitation.isVisible = false
+                }
+                if (weather.snow != null){
                     txtSnowPrecipitation.text = context?.getString(
                         R.string.snow_pattern,
                         weather.snow.toString()
                     )
+                    txtSnowPrecipitation.isVisible = true
+                } else {
+                    txtSnowPrecipitation.isVisible = false
+                }
             } else {
                 txtPopTitle.isVisible = false
                 txtRainPrecipitation.isVisible = false

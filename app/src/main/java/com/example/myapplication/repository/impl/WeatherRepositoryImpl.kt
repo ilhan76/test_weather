@@ -1,6 +1,7 @@
 package com.example.myapplication.repository.impl
 
 import android.util.Log
+import com.example.myapplication.data.domain.CityDomain
 import com.example.myapplication.data.domain.CurrentWeatherDomain
 import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
@@ -18,6 +19,19 @@ class WeatherRepositoryImpl(
     private val remoteDatasource: RemoteDatasource
 ) : WeatherRepository {
     private val TAG: String = this::class.java.simpleName
+    override fun getCityCoordinate(cityName: String): Flow<RepoResponse<CityDomain>> =
+        flow {
+            emit(withContext(Dispatchers.IO){
+                try{
+                    Log.d(TAG, "getCityCoordinate: Repo")
+                    val resp = remoteDatasource.getCityCoordinate(cityName)
+                    RepoResponse(resp.toDomain(), null)
+                } catch (e: Exception){
+                    RepoResponse<CityDomain>(null, e.localizedMessage)
+                }
+            })
+        }
+
     override fun getCurrentWeather(
         latitude: Double,
         longitude: Double
