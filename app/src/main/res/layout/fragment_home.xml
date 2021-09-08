@@ -26,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/main_weather_icon"
         app:layout_constraintTop_toTopOf="@+id/main_weather_icon"
-        tools:text="Ясное небо" />
+        tools:text="Clear" />
 
     <TextView
         android:id="@+id/txt_description"
@@ -36,7 +36,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="@+id/txt_main"
         app:layout_constraintTop_toBottomOf="@+id/txt_main"
-        tools:text="Легкий ветер" />
+        tools:text="clear sky" />
 
     <TextView
         android:id="@+id/txt_temp"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_weather_icon"
-        tools:text="@string/degr_pattern" />
+        tools:text="21 °C" />
 
     <TextView
         android:id="@+id/txt_feels_like"
@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="@+id/txt_temp"
         app:layout_constraintStart_toStartOf="@+id/txt_temp"
         app:layout_constraintTop_toBottomOf="@+id/txt_temp"
-        tools:text="@string/feels_like_pattern" />
+        tools:text="Feels like: 19 °C" />
 
     <Button
         android:id="@+id/btn_change_location"
@@ -65,11 +65,11 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/shape_btn_location"
-        android:text="@string/home_btn_change_location"
         android:paddingHorizontal="30dp"
-        android:textSize="14sp"
+        android:text="@string/home_btn_change_location"
         android:textAllCaps="false"
         android:textColor="@color/black"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/title_section_bottom_barrier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -156,12 +156,23 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <include layout="@layout/shimmer_hourly_weather"/>
-            <include layout="@layout/shimmer_hourly_weather"/>
-            <include layout="@layout/shimmer_hourly_weather"/>
-            <include layout="@layout/shimmer_hourly_weather"/>
-            <include layout="@layout/shimmer_hourly_weather"/>
-            <include layout="@layout/shimmer_hourly_weather"/>
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
 
         </LinearLayout>
 
@@ -172,6 +183,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -186,17 +198,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_current_day">
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_rv_current_day">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <include layout="@layout/shimmer_daily_weather"/>
-            <include layout="@layout/shimmer_daily_weather"/>
-            <include layout="@layout/shimmer_daily_weather"/>
-            <include layout="@layout/shimmer_daily_weather"/>
-            <include layout="@layout/shimmer_daily_weather"/>
-            <include layout="@layout/shimmer_daily_weather"/>
+
+            <include layout="@layout/shimmer_daily_weather" />
+
+            <include layout="@layout/shimmer_daily_weather" />
+
+            <include layout="@layout/shimmer_daily_weather" />
+
+            <include layout="@layout/shimmer_daily_weather" />
+
+            <include layout="@layout/shimmer_daily_weather" />
+
+            <include layout="@layout/shimmer_daily_weather" />
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
@@ -206,12 +225,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_current_day"
-        tools:listitem="@layout/item_daily_weather"
-        />
+        tools:listitem="@layout/item_daily_weather" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

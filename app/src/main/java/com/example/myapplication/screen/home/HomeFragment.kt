@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -152,11 +153,29 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     }
 
     private fun renderHourlyWeather(weatherItems: List<HourlyWeatherItemDomain>) {
+        binding.shimmerRvCurrentDay.stopShimmerAnimation()
+        binding.shimmerRvCurrentDay.isVisible = false
+        binding.rvCurrentDay.isVisible = true
         hourlyAdapter.setList(weatherItems)
     }
 
     private fun renderDailyWeather(weatherItems: List<DailyWeatherItemDomain>) {
+        binding.shimmerRvNextDays.stopShimmerAnimation()
+        binding.shimmerRvNextDays.isVisible = false
+        binding.rvNextDays.isVisible = true
         dailyAdapter.setList(weatherItems)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.shimmerRvCurrentDay.startShimmerAnimation()
+        binding.shimmerRvNextDays.startShimmerAnimation()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.shimmerRvCurrentDay.stopShimmerAnimation()
+        binding.shimmerRvNextDays.stopShimmerAnimation()
     }
 
     override fun onDestroy() {
