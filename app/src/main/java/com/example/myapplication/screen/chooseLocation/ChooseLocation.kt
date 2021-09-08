@@ -11,7 +11,9 @@ import android.widget.Toast
 import androidx.core.content.edit
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.myapplication.R
 import com.example.myapplication.data.domain.CityDomain
 import com.example.myapplication.databinding.FragmentChooseLocationBinding
 import com.example.myapplication.util.*
@@ -24,20 +26,20 @@ class ChooseLocation : Fragment() {
 
     private val viewModel by viewModels<LocationViewModel>()
 
-    private var appNavigation: AppNavigation? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChooseLocationBinding.inflate(inflater, container, false)
-        init()
         return binding.root
     }
 
-    private fun init(){
-        appNavigation = requireActivity() as AppNavigation
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+    }
 
+    private fun init(){
         viewModel.cityLiveData.observe(viewLifecycleOwner, this::render)
 
         binding.btnSearch.setOnClickListener {
@@ -56,7 +58,7 @@ class ChooseLocation : Fragment() {
             }
             editor.apply()
 
-            appNavigation?.toHome()
+            findNavController().navigate(R.id.action_chooseLocation_to_homeFragment)
         }
     }
 

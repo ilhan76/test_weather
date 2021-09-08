@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.adapters.DailyWeatherAdapter
@@ -33,7 +34,6 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<HomeViewModel>()
-    private var appNavigation: AppNavigation? = null
 
     private val hourlyAdapter: HourlyWeatherAdapter = HourlyWeatherAdapter()
     private val dailyAdapter: DailyWeatherAdapter = DailyWeatherAdapter()
@@ -45,13 +45,16 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        init()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
     }
 
     private fun init() {
         Log.d(TAG, "init: Init")
-        appNavigation = requireActivity() as AppNavigation
 
         locationManager = requireContext().getSystemService(LOCATION_SERVICE) as LocationManager
         checkSelfPermission()
@@ -63,6 +66,10 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         viewModel.currentWeatherLiveData.observe(viewLifecycleOwner, this::renderCurrentWeather)
         viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::renderHourlyWeather)
         viewModel.dailyWeatherLiveData.observe(viewLifecycleOwner, this::renderDailyWeather)
+
+        binding.btnChangeLocation.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_chooseLocation)
+        }
 
         viewModel.loadCurrentWeather()
         viewModel.loadHourlyWeather()
@@ -84,7 +91,6 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
             )
             ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
         } else {
-            Log.d(TAG, "init: Success")
             locationManager?.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER,
                 0L,
@@ -162,6 +168,6 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     override fun toDetail(weatherItemDomain: DailyWeatherItemDomain?) {
         val bundle =  Bundle()
         bundle.putSerializable(ARG_DETAIL_WEATHER, weatherItemDomain)
-        appNavigation?.toDetail(bundle)
+        findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
     }
 }
