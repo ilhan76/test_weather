@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.domain.CurrentWeatherDomain
+import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.data.source.impl.RemoteDatasourceImpl
 import com.example.myapplication.repository.WeatherRepository
@@ -23,11 +24,14 @@ class HomeViewModel(private val context: Application): AndroidViewModel(context)
         remoteDatasource = RemoteDatasourceImpl()
     )
 
+    private val _currentWeatherLiveData = MutableLiveData<CurrentWeatherDomain>()
+    val currentWeatherLiveData: LiveData<CurrentWeatherDomain> = _currentWeatherLiveData
+
     private val _hourlyWeatherLiveData = MutableLiveData<List<HourlyWeatherItemDomain>>()
     val hourlyWeatherLiveData: LiveData<List<HourlyWeatherItemDomain>> = _hourlyWeatherLiveData
 
-    private val _currentWeatherLiveData = MutableLiveData<CurrentWeatherDomain>()
-    val currentWeatherLiveData: LiveData<CurrentWeatherDomain> = _currentWeatherLiveData
+    private val _dailyWeatherLiveData = MutableLiveData<List<DailyWeatherItemDomain>>()
+    val dailyWeatherLiveData: LiveData<List<DailyWeatherItemDomain>> = _dailyWeatherLiveData
 
     fun loadCurrentWeather(latitude: Double, longitude: Double){
         viewModelScope.launch {
@@ -58,6 +62,22 @@ class HomeViewModel(private val context: Application): AndroidViewModel(context)
                             }
                         } else{
                             Log.d(TAG, "loadHourlyWeather: Error ${it.message}")
+                        }
+                    }.collect()
+            }
+        }
+    }
+
+    fun loadDailyWeather(latitude: Double, longitude: Double){
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                repository.getDailyListWeather(latitude, longitude)
+                    .onEach {
+                        if (it.content!= null){
+                            Log.d(TAG, "loadDailyWeather: ${it.content}")
+                            _dailyWeatherLiveData.postValue(it.content!!)
+                        } else {
+                            Log.d(TAG, "loadDailyWeather: Error ${it.message}")
                         }
                     }.collect()
             }

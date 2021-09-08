@@ -2,6 +2,7 @@ package com.example.myapplication.repository.impl
 
 import android.util.Log
 import com.example.myapplication.data.domain.CurrentWeatherDomain
+import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.data.source.RemoteDatasource
 import com.example.myapplication.net.response.RepoResponse
@@ -49,6 +50,24 @@ class WeatherRepositoryImpl(
                 } catch (e: Exception) {
                     Log.d(TAG, "getHourlyListWeather: Error ${e.localizedMessage}")
                     RepoResponse<List<HourlyWeatherItemDomain>>(null, e.localizedMessage)
+                }
+            })
+        }
+
+    override fun getDailyListWeather(
+        latitude: Double,
+        longitude: Double
+    ): Flow<RepoResponse<List<DailyWeatherItemDomain>>> =
+        flow {
+            emit(withContext(Dispatchers.IO){
+                try {
+                    Log.d(TAG, "getDailyListWeather: Repository")
+                    val resp = remoteDatasource.getDailyListWeather(latitude, longitude)
+                    val list = resp.daily?.map { it.toDomain() }
+                    RepoResponse(list, null)
+                } catch (e: Exception){
+                    Log.d(TAG, "getDailyListWeather: Error ${e.localizedMessage}")
+                    RepoResponse<List<DailyWeatherItemDomain>>(null, e.localizedMessage)
                 }
             })
         }

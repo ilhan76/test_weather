@@ -1,6 +1,7 @@
 package com.example.myapplication.net
 
 import com.example.myapplication.net.response.CurrentWeatherResponse
+import com.example.myapplication.net.response.DailyListWeatherResponse
 import com.example.myapplication.net.response.HourlyListWeatherResponse
 import com.example.myapplication.util.addJsonConvertor
 import com.example.myapplication.util.setClient
@@ -45,8 +46,8 @@ interface ApiService {
         @Query("lon") longitude: Double,
         @Query("lang") language: String,
         @Query("appid") appid: String,
-        @Query("metric") metric: String
-    )
+        @Query("units") units: String
+    ): DailyListWeatherResponse
 
     // @GET("onecall?exclude=current,minutely,hourly,daily,alerts")
 }

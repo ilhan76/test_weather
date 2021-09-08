@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.adapters.HourlyWeatherAdapter
 import com.example.myapplication.data.domain.CurrentWeatherDomain
+import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.databinding.FragmentHomeBinding
 import kotlin.math.log
@@ -37,6 +38,7 @@ class HomeFragment : Fragment() {
     private val locationListener: LocationListener = LocationListener {
         viewModel.loadCurrentWeather(it.latitude, it.longitude)
         viewModel.loadHourlyWeather(it.latitude, it.longitude)
+        viewModel.loadDailyWeather(it.latitude, it.longitude)
     }
 
     override fun onCreateView(
@@ -78,16 +80,9 @@ class HomeFragment : Fragment() {
 
         binding.rvCurrentDay.adapter = hourlyAdapter
 
-        viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::renderHourlyWeather)
         viewModel.currentWeatherLiveData.observe(viewLifecycleOwner, this::renderCurrentWeather)
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::renderHourlyWeather)
+        viewModel.dailyWeatherLiveData.observe(viewLifecycleOwner, this::renderDailyWeather)
     }
 
     private fun renderCurrentWeather(currentWeather: CurrentWeatherDomain) {
@@ -132,6 +127,10 @@ class HomeFragment : Fragment() {
 
     private fun renderHourlyWeather(weatherItemsDomain: List<HourlyWeatherItemDomain>) {
         hourlyAdapter.setList(weatherItemsDomain)
+    }
+
+    private fun renderDailyWeather(weatherItem: List<DailyWeatherItemDomain>){
+
     }
 
     override fun onDestroy() {
