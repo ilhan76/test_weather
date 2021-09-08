@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Weather Forecast</string>
+
+    <string name="degr_pattern">%d °C</string>
+
+    <string name="feels_like_pattern">Feels like %s °C</string>
+    <string name="wind_pattern">Wind: %dm/s</string>
+    <string name="humidity_pattern">Humidity: %dPer</string>
+    <string name="uv_index_pattern">UV index: %s</string>
+    <string name="pressure_pattern">Pressure: %shPa</string>
+    <string name="visibility_pattern">Visibility: %skm</string>
+    <string name="daily_temp_pattern">%d / %d °C</string>
+
+    <!-- Home Fragment-->
+    <string name="home_btn_change_location">Change Location</string>
+    <!-- Home Fragment-->
 </resources>
