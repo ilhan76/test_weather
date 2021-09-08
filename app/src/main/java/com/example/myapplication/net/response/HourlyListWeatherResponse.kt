@@ -1,6 +1,6 @@
 package com.example.myapplication.net.response
 
-import com.example.myapplication.data.dto.item.WeatherDto
+import com.example.myapplication.data.dto.WeatherDto
 import com.google.gson.annotations.SerializedName
 
 data class HourlyListWeatherResponse(

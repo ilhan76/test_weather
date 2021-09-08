@@ -4,4 +4,5 @@ import android.os.Bundle
 
 interface AppNavigation {
     fun toDetail(bundle: Bundle)
+    fun toHome()
 }

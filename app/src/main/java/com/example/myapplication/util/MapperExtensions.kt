@@ -1,8 +1,10 @@
 package com.example.myapplication.util
 
+import com.example.myapplication.data.domain.CityDomain
 import com.example.myapplication.data.domain.CurrentWeatherDomain
 import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
+import com.example.myapplication.net.response.CityResponse
 import com.example.myapplication.net.response.CurrentDto
 import com.example.myapplication.net.response.DailyWeatherItemDto
 import com.example.myapplication.net.response.HourlyWeatherItemDto
@@ -47,6 +49,17 @@ fun DailyWeatherItemDto.toDomain() = DailyWeatherItemDomain(
     main = weather.first().main,
     description = weather.first().description,
     iconUrl = getImageUrl(weather.first().icon)
+)
+
+// todo - переделать
+fun CityResponse.toDomain() = CityDomain(
+    lon = coord?.lon!!,
+    lat = coord.lat,
+    main = weatherDto?.first()?.main!!,
+    description = weatherDto.first().description,
+    icon = getImageUrl(weatherDto.first().icon),
+    id = id!!,
+    name = name!!
 )
 
 private fun getImageUrl(path: String): String {

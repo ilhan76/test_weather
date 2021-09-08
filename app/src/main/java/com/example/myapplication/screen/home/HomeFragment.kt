@@ -1,7 +1,9 @@
 package com.example.myapplication.screen.home
 
 import android.Manifest
+import android.content.Context
 import android.content.Context.LOCATION_SERVICE
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.LocationListener
 import android.location.LocationManager
@@ -23,8 +25,7 @@ import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.screen.detail.ARG_DETAIL_WEATHER
 import com.example.myapplication.screen.detail.DetailFragment
-import com.example.myapplication.util.AppNavigation
-import com.example.myapplication.util.RvDailyWeatherDelegate
+import com.example.myapplication.util.*
 
 class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     private val TAG: String = this::class.java.simpleName
@@ -38,11 +39,6 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     private val dailyAdapter: DailyWeatherAdapter = DailyWeatherAdapter()
 
     private var locationManager: LocationManager? = null
-    private val locationListener: LocationListener = LocationListener {
-        viewModel.loadCurrentWeather(it.latitude, it.longitude)
-        viewModel.loadHourlyWeather(it.latitude, it.longitude)
-        viewModel.loadDailyWeather(it.latitude, it.longitude)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +63,10 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         viewModel.currentWeatherLiveData.observe(viewLifecycleOwner, this::renderCurrentWeather)
         viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::renderHourlyWeather)
         viewModel.dailyWeatherLiveData.observe(viewLifecycleOwner, this::renderDailyWeather)
+
+        viewModel.loadCurrentWeather()
+        viewModel.loadHourlyWeather()
+        viewModel.loadDailyWeather()
     }
 
     private fun checkSelfPermission() {
@@ -88,9 +88,16 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
             locationManager?.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER,
                 0L,
-                10000f,
-                locationListener
-            )
+                10000f
+            ){
+                val pref: SharedPreferences = requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
+                val editor = pref.edit()
+                editor.apply {
+                    putFloat(PREF_ARG_LAT_GEO, it.longitude.toFloat())
+                    putFloat(PREF_ARG_LAT_GEO, it.latitude.toFloat())
+                }
+                editor.apply()
+            }
         }
     }
 

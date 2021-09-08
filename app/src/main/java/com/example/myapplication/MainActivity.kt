@@ -81,4 +81,8 @@ class MainActivity : AppCompatActivity(), AppNavigation {
     override fun toDetail(bundle: Bundle) {
         navController?.navigate(R.id.action_homeFragment_to_detailFragment, bundle)
     }
+
+    override fun toHome() {
+        navController?.navigate(R.id.action_chooseLocation_to_homeFragment)
+    }
 }
