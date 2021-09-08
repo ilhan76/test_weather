@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screen.detail.DetailFragment">
+
+    <TextView
+        android:id="@+id/txt_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_item_bg"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/main_weather_icon"
+        tools:text="2021-09-08" />
+
+    <ImageView
+        android:id="@+id/main_weather_icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/txt_main"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_date"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txt_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/txt_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_weather_icon"
+        app:layout_constraintTop_toTopOf="@+id/main_weather_icon"
+        tools:text="Ясное небо" />
+
+    <TextView
+        android:id="@+id/txt_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/main_weather_icon"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@+id/txt_main"
+        app:layout_constraintTop_toBottomOf="@+id/txt_main"
+        tools:text="Легкий ветер" />
+
+    <TextView
+        android:id="@+id/txt_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="55sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_weather_icon"
+        tools:text="@string/daily_temp_pattern" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/title_section_bottom_barrier"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="main_weather_icon, txt_main,
+         txt_description, txt_temp" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_flow_bg"
+        app:constraint_referenced_ids="txt_wind, txt_humidity, txt_dew_point, txt_pressure,
+        txt_pop, txt_clouds"
+        app:flow_firstHorizontalStyle="spread"
+        app:flow_horizontalGap="10dp"
+        app:flow_verticalGap="10dp"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_section_bottom_barrier" />
+
+    <TextView
+        android:id="@+id/txt_wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/wind_pattern" />
+
+    <TextView
+        android:id="@+id/txt_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/humidity_pattern" />
+
+    <TextView
+        android:id="@+id/txt_dew_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/dew_point_pattern" />
+
+    <TextView
+        android:id="@+id/txt_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/pressure_pattern" />
+
+    <TextView
+        android:id="@+id/txt_pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/pop_pattern" />
+
+    <TextView
+        android:id="@+id/txt_clouds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/clouds_pattern" />
+
+    <TextView
+        android:id="@+id/txt_temp_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Temperature"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flow" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/temp_flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginTop="10dp"
+        app:constraint_referenced_ids="txt_temp_morn, txt_temp_day,
+         txt_temp_eve, txt_temp_night"
+        app:flow_firstHorizontalStyle="spread"
+        app:flow_horizontalGap="10dp"
+        app:flow_verticalGap="10dp"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_temp_title" />
+
+    <TextView
+        android:id="@+id/txt_temp_morn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_item_bg"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/morning_temp_pattern" />
+
+    <TextView
+        android:id="@+id/txt_temp_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_item_bg"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/day_temp_pattern" />
+
+    <TextView
+        android:id="@+id/txt_temp_eve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_item_bg"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/evening_temp_pattern" />
+
+    <TextView
+        android:id="@+id/txt_temp_night"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_item_bg"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/night_temp_pattern" />
+
+    <TextView
+        android:id="@+id/txt_pop_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/home_txt_pop_title"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temp_flow" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/precipitation_flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginTop="10dp"
+        app:constraint_referenced_ids="txt_rain_precipitation, txt_snow_precipitation"
+        app:flow_firstHorizontalStyle="spread"
+        app:flow_horizontalGap="10dp"
+        app:flow_verticalGap="10dp"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_pop_title" />
+
+    <TextView
+        android:id="@+id/txt_rain_precipitation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_item_bg"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/rain_pattern" />
+
+    <TextView
+        android:id="@+id/txt_snow_precipitation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_item_bg"
+        android:elevation="10dp"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="@string/snow_pattern" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

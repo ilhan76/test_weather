@@ -28,9 +28,24 @@ fun HourlyWeatherItemDto.toDomain() = HourlyWeatherItemDomain(
 )
 
 fun DailyWeatherItemDto.toDomain() = DailyWeatherItemDomain(
-    data = unixToIso(dt).substring(0, 10),
-    minTemp = temp.min.toInt(),
-    maxTemp = temp.max.toInt(),
+    date = unixToIso(dt).substring(0, 10),
+    tempMin = temp.min.toInt(),
+    tempMax = temp.max.toInt(),
+    tempMorn = temp.morn.toInt(),
+    tempDay = temp.day.toInt(),
+    tempEve = temp.eve.toInt(),
+    tempNight = temp.night.toInt(),
+    pressure = pressure,
+    humidity = humidity,
+    dewPoint = dewPoint.toInt(),
+    windSpeed = windSpeed.toInt(),
+    clouds = clouds,
+    uvi = uvi,
+    pop = pop,
+    rain = rain,
+    snow = snow,
+    main = weather.first().main,
+    description = weather.first().description,
     iconUrl = getImageUrl(weather.first().icon)
 )
 

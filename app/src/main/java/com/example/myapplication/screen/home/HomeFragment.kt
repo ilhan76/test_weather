@@ -21,13 +21,18 @@ import com.example.myapplication.data.domain.CurrentWeatherDomain
 import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.example.myapplication.screen.detail.ARG_DETAIL_WEATHER
+import com.example.myapplication.screen.detail.DetailFragment
+import com.example.myapplication.util.AppNavigation
+import com.example.myapplication.util.RvDailyWeatherDelegate
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     private val TAG: String = this::class.java.simpleName
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<HomeViewModel>()
+    private var appNavigation: AppNavigation? = null
 
     private val hourlyAdapter: HourlyWeatherAdapter = HourlyWeatherAdapter()
     private val dailyAdapter: DailyWeatherAdapter = DailyWeatherAdapter()
@@ -50,11 +55,13 @@ class HomeFragment : Fragment() {
 
     private fun init() {
         Log.d(TAG, "init: Init")
+        appNavigation = requireActivity() as AppNavigation
 
         locationManager = requireContext().getSystemService(LOCATION_SERVICE) as LocationManager
         checkSelfPermission()
 
         binding.rvCurrentDay.adapter = hourlyAdapter
+        dailyAdapter.attachDelegate(this)
         binding.rvNextDays.adapter = dailyAdapter
 
         viewModel.currentWeatherLiveData.observe(viewLifecycleOwner, this::renderCurrentWeather)
@@ -137,6 +144,13 @@ class HomeFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        locationManager = null
         _binding = null
+    }
+
+    override fun toDetail(weatherItemDomain: DailyWeatherItemDomain?) {
+        val bundle =  Bundle()
+        bundle.putSerializable(ARG_DETAIL_WEATHER, weatherItemDomain)
+        appNavigation?.toDetail(bundle)
     }
 }

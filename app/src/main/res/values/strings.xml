@@ -10,8 +10,18 @@
     <string name="pressure_pattern">Pressure: %shPa</string>
     <string name="visibility_pattern">Visibility: %skm</string>
     <string name="daily_temp_pattern">%d / %d °C</string>
+    <string name="dew_point_pattern">Dew point: %d</string>
+    <string name="pop_pattern">Probability of precipitation: %s</string>
+    <string name="clouds_pattern">Clouds: %sPer</string>
 
     <!-- Home Fragment-->
     <string name="home_btn_change_location">Change Location</string>
+    <string name="home_txt_pop_title">Probability of precipitation</string>
+    <string name="morning_temp_pattern">Morning: %d °C</string>
+    <string name="day_temp_pattern">Day: %d °C</string>
+    <string name="evening_temp_pattern">Evening: %d °C</string>
+    <string name="night_temp_pattern">Night: %d °C</string>
+    <string name="rain_pattern">Rain: %s</string>
+    <string name="snow_pattern">Snow: %s</string>
     <!-- Home Fragment-->
 </resources>
