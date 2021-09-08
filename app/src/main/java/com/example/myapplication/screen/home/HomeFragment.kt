@@ -137,6 +137,7 @@ class HomeFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        locationManager = null
         _binding = null
     }
 }

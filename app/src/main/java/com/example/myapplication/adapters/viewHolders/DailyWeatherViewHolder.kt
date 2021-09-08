@@ -11,11 +11,11 @@ class DailyWeatherViewHolder(private val binding: ItemDailyWeatherBinding) :
 
     fun bind(item: DailyWeatherItemDomain) {
         binding.apply {
-            txtDate.text = item.data
+            txtDate.text = item.date
             txtTemp.text = binding.root.context.getString(
                 R.string.daily_temp_pattern,
-                item.maxTemp,
-                item.minTemp
+                item.tempMax,
+                item.tempMin
             )
             Glide.with(binding.root.context)
                 .load(item.iconUrl)
