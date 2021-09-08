@@ -1,11 +1,6 @@
 package com.example.myapplication.data.domain
 
-/*data class DailyWeatherItemDomain(
-    val data: String,
-    val minTemp: Int,
-    val maxTemp: Int,
-    val iconUrl: String
-)*/
+import java.io.Serializable
 
 data class DailyWeatherItemDomain(
     val date: String,
@@ -27,4 +22,4 @@ data class DailyWeatherItemDomain(
     val main: String,
     val description: String,
     val iconUrl: String
-)
+) : Serializable

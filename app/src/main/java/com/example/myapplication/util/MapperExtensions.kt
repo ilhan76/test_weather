@@ -27,15 +27,8 @@ fun HourlyWeatherItemDto.toDomain() = HourlyWeatherItemDomain(
     temp = temp
 )
 
-/*fun DailyWeatherItemDto.toDomain() = DailyWeatherItemDomain(
-    data = unixToIso(dt).substring(0, 10),
-    minTemp = temp.min.toInt(),
-    maxTemp = temp.max.toInt(),
-    iconUrl = getImageUrl(weather.first().icon)
-)*/
-
 fun DailyWeatherItemDto.toDomain() = DailyWeatherItemDomain(
-    date = unixToIso(dt).substring(0, 11),
+    date = unixToIso(dt).substring(0, 10),
     tempMin = temp.min.toInt(),
     tempMax = temp.max.toInt(),
     tempMorn = temp.morn.toInt(),
