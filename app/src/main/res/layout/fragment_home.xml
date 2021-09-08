@@ -11,32 +11,83 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/txt_main"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_main_weather_icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/shimmer_txt_main"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <TextView
         android:id="@+id/txt_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/txt_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/main_weather_icon"
         app:layout_constraintTop_toTopOf="@+id/main_weather_icon"
         tools:text="Clear" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_txt_main"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/shimmer_txt_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/shimmer_main_weather_icon"
+        app:layout_constraintTop_toTopOf="@+id/shimmer_main_weather_icon">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <TextView
         android:id="@+id/txt_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/main_weather_icon"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="@+id/txt_main"
         app:layout_constraintTop_toBottomOf="@+id/txt_main"
         tools:text="clear sky" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_txt_description"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/shimmer_main_weather_icon"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@+id/shimmer_txt_main"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_txt_main">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <TextView
         android:id="@+id/txt_temp"
@@ -44,19 +95,63 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="55sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_weather_icon"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_main_weather_icon"
         tools:text="21 °C" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_txt_temp"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        android:textSize="55sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_main_weather_icon">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <TextView
         android:id="@+id/txt_feels_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/txt_temp"
         app:layout_constraintStart_toStartOf="@+id/txt_temp"
         app:layout_constraintTop_toBottomOf="@+id/txt_temp"
         tools:text="Feels like: 19 °C" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_txt_feels_like"
+        android:layout_width="100dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/shimmer_txt_temp"
+        app:layout_constraintStart_toStartOf="@+id/shimmer_txt_temp"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_txt_temp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/title_section_bottom_barrier"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="txt_main, txt_description, txt_temp,
+        txt_feels_like, main_weather_icon, shimmer_txt_main, shimmer_txt_description,
+        shimmer_txt_temp, shimmer_txt_feels_like, shimmer_main_weather_icon" />
 
     <Button
         android:id="@+id/btn_change_location"
@@ -70,19 +165,10 @@
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/title_section_bottom_barrier"
+        app:layout_constraintBottom_toTopOf="@+id/flow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_feels_like" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/title_section_bottom_barrier"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="main_weather_icon, txt_main,
-         txt_description, txt_temp, txt_feels_like, btn_change_location" />
+        app:layout_constraintTop_toBottomOf="@+id/title_section_bottom_barrier" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow"
@@ -91,7 +177,8 @@
         android:layout_marginHorizontal="5dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/shape_flow_bg"
-        app:constraint_referenced_ids="txt_wind, txt_humidity, txt_uv_index, txt_pressure, txt_visibility"
+        app:constraint_referenced_ids="txt_wind, txt_humidity,
+         txt_uv_index, txt_pressure, txt_visibility"
         app:flow_firstHorizontalStyle="spread"
         app:flow_horizontalGap="10dp"
         app:flow_verticalGap="10dp"
@@ -99,7 +186,7 @@
         app:layout_constraintBottom_toTopOf="@+id/rv_current_day"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_section_bottom_barrier" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_change_location" />
 
     <TextView
         android:id="@+id/txt_wind"
