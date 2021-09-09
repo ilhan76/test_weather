@@ -29,7 +29,7 @@
             android:id="@+id/action_chooseLocation_to_homeFragment"
             app:destination="@id/homeFragment"
             app:enterAnim="@android:anim/slide_in_left"
-            app:popUpTo="@+id/navigation"
+            app:popUpTo="@id/chooseLocation"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment

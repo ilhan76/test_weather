@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_standard">20dp</dimen>
+
+    <!-- Choose Location-->
     <dimen name="choose_location_etxt_search_margin_end">10dp</dimen>
     <dimen name="choose_location_etxt_search_elevation">20dp</dimen>
     <dimen name="choose_location_etxt_search_padding_horizontal">10dp</dimen>
@@ -25,6 +27,9 @@
     <dimen name="choose_location_city_card_txt_desc_margin_end">10dp</dimen>
     <dimen name="choose_location_city_card_txt_desc_txt_size">16sp</dimen>
     <dimen name="choose_location_city_card_city_txt_size">24sp</dimen>
+    <!-- Choose Location-->
+
+    <!-- item daily-->
     <dimen name="item_daily_margin_horizontal">10dp</dimen>
     <dimen name="item_daily_margin_vertical">5dp</dimen>
     <dimen name="item_daily_elevation">10dp</dimen>
@@ -38,4 +43,6 @@
     <dimen name="item_daily_icon_margin_end">10dp</dimen>
     <dimen name="item_daily_icon_margin_start">20dp</dimen>
     <dimen name="item_daily_ib_margin_end">10dp</dimen>
+    <dimen name="shimmer_daily_txt_date_width">100dp</dimen>
+    <!-- item daily-->
 </resources>
