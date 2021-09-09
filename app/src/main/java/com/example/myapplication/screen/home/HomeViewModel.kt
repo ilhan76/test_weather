@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -61,12 +62,19 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
     }
 
     fun loadCityName(flag: String) {
+        Toast.makeText(context,
+            "${if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LAT, 0f)
+            .toDouble() else pref.getFloat(PREF_ARG_LAT_GEO, 0f).toDouble()}" +
+                    "\n" +
+                    "${if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f).toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()}",
+            Toast.LENGTH_SHORT).show()
+
         _cityNameLiveData.postValue(FeatureState.Loading)
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 repository.getCityName(
                     if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LAT, 0f)
-                        .toDouble() else pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
+                        .toDouble() else pref.getFloat(PREF_ARG_LAT_GEO, 0f).toDouble(),
                     if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f)
                         .toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
                 ).onEach {
@@ -88,7 +96,7 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
             withContext(Dispatchers.IO) {
                 repository.getCurrentWeather(
                     if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LAT, 0f)
-                        .toDouble() else pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
+                        .toDouble() else pref.getFloat(PREF_ARG_LAT_GEO, 0f).toDouble(),
                     if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f)
                         .toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
                 ).onEach {
@@ -110,7 +118,7 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
             withContext(Dispatchers.IO) {
                 repository.getHourlyListWeather(
                     if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LAT, 0f)
-                        .toDouble() else pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
+                        .toDouble() else pref.getFloat(PREF_ARG_LAT_GEO, 0f).toDouble(),
                     if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f)
                         .toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
                 ).onEach {
@@ -136,7 +144,7 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
             withContext(Dispatchers.IO) {
                 repository.getDailyListWeather(
                     if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LAT, 0f)
-                        .toDouble() else pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
+                        .toDouble() else pref.getFloat(PREF_ARG_LAT_GEO, 0f).toDouble(),
                     if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f)
                         .toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
                 ).onEach {

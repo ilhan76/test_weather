@@ -93,7 +93,6 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
 
     private fun initListeners() {
         binding.btnChangeLocation.setOnClickListener {
-            // todo - fix
             findNavController().navigate(R.id.action_homeFragment_to_chooseLocation)
         }
     }
@@ -116,7 +115,7 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
                     requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
                 val editor = pref.edit()
                 editor.apply {
-                    putFloat(PREF_ARG_LAT_GEO, it.longitude.toFloat())
+                    putFloat(PREF_ARG_LON_GEO, it.longitude.toFloat())
                     putFloat(PREF_ARG_LAT_GEO, it.latitude.toFloat())
                 }
                 editor.apply()
