@@ -8,12 +8,12 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="@dimen/item_hourly_margin_horisontal"
+        android:layout_marginVertical="@dimen/item_hourly_margin_vertical"
         android:background="@drawable/shape_item_bg"
-        android:elevation="10dp"
+        android:elevation="@dimen/item_hourly_elevation"
         android:orientation="vertical"
-        android:padding="5dp"
+        android:padding="@dimen/item_hourly_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,13 +25,13 @@
             android:layout_height="match_parent"
             android:textColor="@color/black"
             android:layout_gravity="center"
-            android:textSize="14sp"
+            android:textSize="@dimen/item_hourly_time_txt_size"
             tools:text="12:00" />
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/item_hourly_icon_size"
+            android:layout_height="@dimen/item_hourly_icon_size"
             android:layout_gravity="center"
             tools:src="@tools:sample/avatars"/>
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/item_hourly_txt_temp_txt_size"
             android:layout_gravity="center"
             tools:text="30° C" />
 

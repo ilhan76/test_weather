@@ -1,11 +1,8 @@
 package com.example.myapplication.net
 
-import com.example.myapplication.net.response.CityResponse
-import com.example.myapplication.net.response.CurrentWeatherResponse
-import com.example.myapplication.net.response.DailyListWeatherResponse
-import com.example.myapplication.net.response.HourlyListWeatherResponse
-import com.example.myapplication.util.addJsonConvertor
-import com.example.myapplication.util.setClient
+import com.example.myapplication.net.response.*
+import com.example.myapplication.util.extensions.addJsonConvertor
+import com.example.myapplication.util.extensions.setClient
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -25,36 +22,30 @@ interface ApiService {
 
     @GET("weather")
     suspend fun getCityCoordinate(
-        @Query("q") cityName: String,
-        @Query("lang") language: String,
-        @Query("appid") appid: String,
-        @Query("units") units: String
+        @Query("q") cityName: String
     ): CityResponse
+
+    @GET("weather")
+    suspend fun getCityName(
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double
+    ): CityNameResponse
 
     @GET("onecall?exclude=minutely,hourly,daily,alerts")
     suspend fun getCurrentWeather(
         @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double,
-        @Query("lang") language: String,
-        @Query("appid") appid: String,
-        @Query("units") units: String
+        @Query("lon") longitude: Double
     ): CurrentWeatherResponse
 
     @GET("onecall?exclude=current,minutely,daily,alerts")
     suspend fun getHourlyListWeather(
         @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double,
-        @Query("lang") language: String,
-        @Query("appid") appid: String,
-        @Query("units") units: String
+        @Query("lon") longitude: Double
     ): HourlyListWeatherResponse
 
     @GET("onecall?exclude=current,minutely,hourly,alerts")
     suspend fun getDailyListWeather(
         @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double,
-        @Query("lang") language: String,
-        @Query("appid") appid: String,
-        @Query("units") units: String
+        @Query("lon") longitude: Double
     ): DailyListWeatherResponse
 }
