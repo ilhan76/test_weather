@@ -70,9 +70,10 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
             findNavController().navigate(R.id.action_homeFragment_to_chooseLocation)
         }
 
-        viewModel.loadCurrentWeather()
-        viewModel.loadHourlyWeather()
-        viewModel.loadDailyWeather()
+        val flag = arguments?.getString(GEO_FLAG) as String
+        viewModel.loadCurrentWeather(flag)
+        viewModel.loadHourlyWeather(flag)
+        viewModel.loadDailyWeather(flag)
     }
 
     private fun checkSelfPermission() {
@@ -99,14 +100,15 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
                     requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
                 val editor = pref.edit()
                 editor.apply {
-                    putString(PREF_ARG_FLAG, FLAG_GEOLOCATION)
                     putFloat(PREF_ARG_LAT_GEO, it.longitude.toFloat())
                     putFloat(PREF_ARG_LAT_GEO, it.latitude.toFloat())
                 }
                 editor.apply()
-                viewModel.loadCurrentWeather()
-                viewModel.loadHourlyWeather()
-                viewModel.loadDailyWeather()
+
+                val flag = arguments?.getString(GEO_FLAG) as String
+                viewModel.loadCurrentWeather(flag)
+                viewModel.loadHourlyWeather(flag)
+                viewModel.loadDailyWeather(flag)
             }
         }
     }

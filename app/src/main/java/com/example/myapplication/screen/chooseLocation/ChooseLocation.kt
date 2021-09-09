@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.edit
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -50,15 +49,9 @@ class ChooseLocation : Fragment() {
             }
         }
         binding.cityCard.setOnClickListener {
-            val pref: SharedPreferences = requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
-            val editor = pref.edit()
-
-            editor.apply {
-                putString(PREF_ARG_FLAG, FLAG_CITY)
-            }
-            editor.apply()
-
-            findNavController().navigate(R.id.action_chooseLocation_to_homeFragment)
+            val bundle = Bundle()
+            bundle.putString(GEO_FLAG, FLAG_CITY)
+            findNavController().navigate(R.id.action_chooseLocation_to_homeFragment, bundle)
         }
     }
 

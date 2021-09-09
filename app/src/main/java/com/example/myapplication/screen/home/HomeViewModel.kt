@@ -38,23 +38,15 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
     private val _dailyWeatherLiveData = MutableLiveData<List<DailyWeatherItemDomain>>()
     val dailyWeatherLiveData: LiveData<List<DailyWeatherItemDomain>> = _dailyWeatherLiveData
 
-    fun loadCurrentWeather() {
-        if (pref.getString(PREF_ARG_FLAG, "") == FLAG_CITY) {
-            loadCurrentWeather(
-                pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
-                pref.getFloat(PREF_ARG_LON, 0f).toDouble()
-            )
-        } else if (pref.getString(PREF_ARG_FLAG, "") == FLAG_GEOLOCATION) {
-            loadCurrentWeather(
-                pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble(),
-                pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
-            )
-        }
-    }
-    private fun loadCurrentWeather(latitude: Double, longitude: Double){
+    fun loadCurrentWeather(flag: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.getCurrentWeather(latitude, longitude)
+                repository.getCurrentWeather(
+                    if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LAT, 0f)
+                        .toDouble() else pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
+                    if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f)
+                        .toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
+                )
                     .onEach {
                         if (it.content != null) {
                             withContext(Dispatchers.Main) {
@@ -68,23 +60,15 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
         }
     }
 
-    fun loadHourlyWeather(){
-        if (pref.getString(PREF_ARG_FLAG, "") == FLAG_CITY) {
-            loadHourlyWeather(
-                pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
-                pref.getFloat(PREF_ARG_LON, 0f).toDouble()
-            )
-        } else if (pref.getString(PREF_ARG_FLAG, "") == FLAG_GEOLOCATION) {
-            loadHourlyWeather(
-                pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble(),
-                pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
-            )
-        }
-    }
-    private fun loadHourlyWeather(latitude: Double, longitude: Double) {
+    fun loadHourlyWeather(flag: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.getHourlyListWeather(latitude, longitude)
+                repository.getHourlyListWeather(
+                    if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LAT, 0f)
+                        .toDouble() else pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
+                    if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f)
+                        .toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
+                )
                     .onEach {
                         if (it.content != null) {
                             Log.d(TAG, "loadHourlyWeather: ${it.content}")
@@ -99,23 +83,15 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
         }
     }
 
-    fun loadDailyWeather(){
-        if (pref.getString(PREF_ARG_FLAG, "") == FLAG_CITY) {
-            loadDailyWeather(
-                pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
-                pref.getFloat(PREF_ARG_LON, 0f).toDouble()
-            )
-        } else if (pref.getString(PREF_ARG_FLAG, "") == FLAG_GEOLOCATION) {
-            loadDailyWeather(
-                pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble(),
-                pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
-            )
-        }
-    }
-    private fun loadDailyWeather(latitude: Double, longitude: Double) {
+    fun loadDailyWeather(flag: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                repository.getDailyListWeather(latitude, longitude)
+                repository.getDailyListWeather(
+                    if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LAT, 0f)
+                        .toDouble() else pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
+                    if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f)
+                        .toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
+                )
                     .onEach {
                         if (it.content != null) {
                             Log.d(TAG, "loadDailyWeather: ${it.content}")

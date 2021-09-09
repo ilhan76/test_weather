@@ -8,6 +8,8 @@ import androidx.core.app.ActivityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.util.FLAG_GEOLOCATION
+import com.example.myapplication.util.GEO_FLAG
 
 class MainActivity : AppCompatActivity() {
     private val TAG: String = this::class.java.simpleName
@@ -38,7 +40,9 @@ class MainActivity : AppCompatActivity() {
             )
             ActivityCompat.requestPermissions(this, permissions, 100)
         } else {
-            navController?.navigate(R.id.action_chooseLocation_to_homeFragment)
+            val bundle = Bundle()
+            bundle.putString(GEO_FLAG, FLAG_GEOLOCATION)
+            navController?.navigate(R.id.action_chooseLocation_to_homeFragment, bundle)
         }
     }
 
@@ -54,7 +58,9 @@ class MainActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 100) {
             if (grantResults.size > 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                navController?.navigate(R.id.action_chooseLocation_to_homeFragment)
+                val bundle = Bundle()
+                bundle.putString(GEO_FLAG, FLAG_GEOLOCATION)
+                navController?.navigate(R.id.action_chooseLocation_to_homeFragment, bundle)
             }
         }
     }
