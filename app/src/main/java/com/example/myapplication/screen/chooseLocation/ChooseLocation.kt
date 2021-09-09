@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,7 +41,6 @@ class ChooseLocation : Fragment() {
 
     private fun init(){
         viewModel.cityLiveData.observe(viewLifecycleOwner, this::render)
-
         initListeners()
     }
 
@@ -49,7 +49,10 @@ class ChooseLocation : Fragment() {
             if (binding.etxtSearch.text.toString().trim().isNotEmpty()){
                 viewModel.findCity(binding.etxtSearch.text.toString())
             } else {
-                Toast.makeText(context, "Field cannot be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Field cannot be empty", Toast.LENGTH_SHORT).apply {
+                    setGravity(Gravity.CENTER, 0, 0)
+                    show()
+                }
             }
         }
 

@@ -19,6 +19,19 @@ class WeatherRepositoryImpl(
     private val remoteDatasource: RemoteDatasource
 ) : WeatherRepository {
     private val TAG: String = this::class.java.simpleName
+    override fun getCityName(latitude: Double, longitude: Double): Flow<RepoResponse<String>> =
+        flow {
+            emit(withContext(Dispatchers.IO){
+                try {
+                    Log.d(TAG, "getCityName: Repo")
+                    val resp = remoteDatasource.getCityName(latitude, longitude)
+                    RepoResponse(resp.name, null)
+                } catch (e: Exception){
+                    RepoResponse<String>(null, e.localizedMessage)
+                }
+            })
+        }
+
     override fun getCityCoordinate(cityName: String): Flow<RepoResponse<CityDomain>> =
         flow {
             emit(withContext(Dispatchers.IO){

@@ -29,6 +29,9 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
     private val pref: SharedPreferences =
         context.getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
 
+    private val _cityNameLiveData = MutableLiveData<String>()
+    val cityNameLiveData: LiveData<String> = _cityNameLiveData
+
     private val _currentWeatherLiveData = MutableLiveData<CurrentWeatherDomain>()
     val currentWeatherLiveData: LiveData<CurrentWeatherDomain> = _currentWeatherLiveData
 
@@ -38,6 +41,27 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
     private val _dailyWeatherLiveData = MutableLiveData<List<DailyWeatherItemDomain>>()
     val dailyWeatherLiveData: LiveData<List<DailyWeatherItemDomain>> = _dailyWeatherLiveData
 
+    fun loadCityName(flag: String) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                repository.getCityName(
+                    if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LAT, 0f)
+                        .toDouble() else pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
+                    if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f)
+                        .toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
+                ).onEach {
+                    if (it.content != null){
+                        withContext(Dispatchers.Main){
+                            _cityNameLiveData.postValue(it.content!!)
+                        }
+                    } else {
+                        Log.d(TAG, "loadCityName: Error ${it.message}")
+                    }
+                }.collect()
+            }
+        }
+    }
+
     fun loadCurrentWeather(flag: String) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
@@ -46,16 +70,15 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
                         .toDouble() else pref.getFloat(PREF_ARG_LAT, 0f).toDouble(),
                     if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f)
                         .toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()
-                )
-                    .onEach {
-                        if (it.content != null) {
-                            withContext(Dispatchers.Main) {
-                                _currentWeatherLiveData.postValue(it.content!!)
-                            }
-                        } else {
-                            Log.d(TAG, "loadCurrentWeather: Error")
+                ).onEach {
+                    if (it.content != null) {
+                        withContext(Dispatchers.Main) {
+                            _currentWeatherLiveData.postValue(it.content!!)
                         }
-                    }.collect()
+                    } else {
+                        Log.d(TAG, "loadCurrentWeather: Error")
+                    }
+                }.collect()
             }
         }
     }

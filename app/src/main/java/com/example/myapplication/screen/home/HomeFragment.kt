@@ -52,6 +52,7 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     override fun onResume() {
         super.onResume()
         binding.apply {
+            shimmerTxtCityName.startShimmerAnimation()
             shimmerMainWeatherIcon.startShimmerAnimation()
             shimmerTxtMain.startShimmerAnimation()
             shimmerTxtDescription.startShimmerAnimation()
@@ -65,6 +66,7 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     override fun onPause() {
         super.onPause()
         binding.apply {
+            shimmerTxtCityName.stopShimmerAnimation()
             shimmerMainWeatherIcon.stopShimmerAnimation()
             shimmerTxtMain.stopShimmerAnimation()
             shimmerTxtDescription.stopShimmerAnimation()
@@ -94,12 +96,12 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         dailyAdapter.attachDelegate(this)
         binding.rvNextDays.adapter = dailyAdapter
 
+        viewModel.cityNameLiveData.observe(viewLifecycleOwner, this::renderCityName)
         viewModel.currentWeatherLiveData.observe(viewLifecycleOwner, this::renderCurrentWeather)
         viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::renderHourlyWeather)
         viewModel.dailyWeatherLiveData.observe(viewLifecycleOwner, this::renderDailyWeather)
 
         initListeners()
-
         update()
     }
 
@@ -133,6 +135,15 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
                 editor.apply()
                 update()
             }
+        }
+    }
+
+    private fun renderCityName(name: String){
+        binding.apply {
+            txtCityName.text = name
+            shimmerTxtCityName.stopShimmerAnimation()
+            shimmerTxtCityName.isVisible = false
+            txtCityName.isVisible = true
         }
     }
 
@@ -210,9 +221,12 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
 
     private fun update() {
         val flag = arguments?.getString(GEO_FLAG) as String
-        viewModel.loadCurrentWeather(flag)
-        viewModel.loadHourlyWeather(flag)
-        viewModel.loadDailyWeather(flag)
+        viewModel.apply {
+            loadCityName(flag)
+            loadCurrentWeather(flag)
+            loadHourlyWeather(flag)
+            loadDailyWeather(flag)
+        }
     }
 
     override fun toDetail(weatherItemDomain: DailyWeatherItemDomain?) {

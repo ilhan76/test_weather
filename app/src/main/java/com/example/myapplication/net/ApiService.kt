@@ -1,9 +1,6 @@
 package com.example.myapplication.net
 
-import com.example.myapplication.net.response.CityResponse
-import com.example.myapplication.net.response.CurrentWeatherResponse
-import com.example.myapplication.net.response.DailyListWeatherResponse
-import com.example.myapplication.net.response.HourlyListWeatherResponse
+import com.example.myapplication.net.response.*
 import com.example.myapplication.util.extensions.addJsonConvertor
 import com.example.myapplication.util.extensions.setClient
 import retrofit2.Retrofit
@@ -27,6 +24,12 @@ interface ApiService {
     suspend fun getCityCoordinate(
         @Query("q") cityName: String
     ): CityResponse
+
+    @GET("weather")
+    suspend fun getCityName(
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double
+    ): CityNameResponse
 
     @GET("onecall?exclude=minutely,hourly,daily,alerts")
     suspend fun getCurrentWeather(

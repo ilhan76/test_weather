@@ -1,11 +1,9 @@
 package com.example.myapplication.data.source
 
-import com.example.myapplication.net.response.CityResponse
-import com.example.myapplication.net.response.CurrentWeatherResponse
-import com.example.myapplication.net.response.DailyListWeatherResponse
-import com.example.myapplication.net.response.HourlyListWeatherResponse
+import com.example.myapplication.net.response.*
 
 interface RemoteDatasource {
+    suspend fun getCityName(latitude: Double, longitude: Double): CityNameResponse
     suspend fun getCityCoordinate(cityName: String): CityResponse
     suspend fun getCurrentWeather(latitude: Double, longitude: Double) : CurrentWeatherResponse
     suspend fun getHourlyListWeather(latitude: Double, longitude: Double): HourlyListWeatherResponse

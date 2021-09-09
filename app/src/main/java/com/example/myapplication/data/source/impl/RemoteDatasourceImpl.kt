@@ -4,13 +4,23 @@ import android.util.Log
 import com.example.myapplication.BuildConfig
 import com.example.myapplication.data.source.RemoteDatasource
 import com.example.myapplication.net.ApiService
-import com.example.myapplication.net.response.CityResponse
-import com.example.myapplication.net.response.CurrentWeatherResponse
-import com.example.myapplication.net.response.DailyListWeatherResponse
-import com.example.myapplication.net.response.HourlyListWeatherResponse
+import com.example.myapplication.net.response.*
 
 class RemoteDatasourceImpl : RemoteDatasource {
     private val TAG: String = this::class.java.simpleName
+    override suspend fun getCityName(latitude: Double, longitude: Double): CityNameResponse {
+        return try {
+            Log.d(TAG, "getCityName: Remote")
+            ApiService.create().getCityName(
+                latitude = latitude,
+                longitude = longitude
+            )
+        } catch (e: Exception){
+            Log.d(TAG, "getCityName: Error ${e.localizedMessage}")
+            CityNameResponse(null, e.localizedMessage)
+        }
+    }
+
     override suspend fun getCityCoordinate(cityName: String): CityResponse {
         return try {
             Log.d(TAG, "getCityCoordinate: Remote")
