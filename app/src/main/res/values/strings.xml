@@ -23,5 +23,12 @@
     <string name="night_temp_pattern">Night: %d °C</string>
     <string name="rain_pattern">Rain: %s</string>
     <string name="snow_pattern">Snow: %s</string>
+    <string name="choose_location_etxt_search_hint">London</string>
+    <string name="choose_location_btn_search_txt">Search</string>
+    <string name="choose_location_btn_geo_txt">Use geolocation</string>
+    <string name="choose_location_txt_error_txt">Sorry, nothing was found</string>
+    <string name="choose_location_city_card_txt_main_txt">Clear</string>
+    <string name="choose_location_city_card_txt_desc_txt">clear sky</string>
+    <string name="choose_location_city_card_city_txt">London</string>
     <!-- Home Fragment-->
 </resources>
