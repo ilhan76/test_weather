@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Context.LOCATION_SERVICE
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
@@ -26,7 +25,6 @@ import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.screen.detail.ARG_DETAIL_WEATHER
-import com.example.myapplication.screen.detail.DetailFragment
 import com.example.myapplication.util.*
 
 class HomeFragment : Fragment(), RvDailyWeatherDelegate {
@@ -96,8 +94,9 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
                 LocationManager.NETWORK_PROVIDER,
                 0L,
                 10000f
-            ){
-                val pref: SharedPreferences = requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
+            ) {
+                val pref: SharedPreferences =
+                    requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
                 val editor = pref.edit()
                 editor.apply {
                     putString(PREF_ARG_FLAG, FLAG_GEOLOCATION)
@@ -149,6 +148,24 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
                 R.string.visibility_pattern,
                 currentWeather.visibility.toString()
             )
+
+            hideShimmerCurrentWeather()
+        }
+    }
+
+    private fun hideShimmerCurrentWeather() {
+        binding.apply {
+            shimmerMainWeatherIcon.isVisible = false
+            shimmerTxtTemp.isVisible = false
+            shimmerTxtFeelsLike.isVisible = false
+            shimmerTxtMain.isVisible = false
+            shimmerTxtDescription.isVisible = false
+
+            mainWeatherIcon.isVisible = true
+            txtTemp.isVisible = true
+            txtFeelsLike.isVisible = true
+            txtMain.isVisible = true
+            txtDescription.isVisible = true
         }
     }
 
@@ -168,14 +185,28 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
 
     override fun onResume() {
         super.onResume()
-        binding.shimmerRvCurrentDay.startShimmerAnimation()
-        binding.shimmerRvNextDays.startShimmerAnimation()
+        binding.apply {
+            shimmerMainWeatherIcon.startShimmerAnimation()
+            shimmerTxtMain.startShimmerAnimation()
+            shimmerTxtDescription.startShimmerAnimation()
+            shimmerTxtTemp.startShimmerAnimation()
+            shimmerTxtFeelsLike.startShimmerAnimation()
+            shimmerRvCurrentDay.startShimmerAnimation()
+            shimmerRvNextDays.startShimmerAnimation()
+        }
     }
 
     override fun onPause() {
         super.onPause()
-        binding.shimmerRvCurrentDay.stopShimmerAnimation()
-        binding.shimmerRvNextDays.stopShimmerAnimation()
+        binding.apply {
+            shimmerMainWeatherIcon.stopShimmerAnimation()
+            shimmerTxtMain.stopShimmerAnimation()
+            shimmerTxtDescription.stopShimmerAnimation()
+            shimmerTxtTemp.stopShimmerAnimation()
+            shimmerTxtFeelsLike.stopShimmerAnimation()
+            shimmerRvCurrentDay.stopShimmerAnimation()
+            shimmerRvNextDays.stopShimmerAnimation()
+        }
     }
 
     override fun onDestroy() {
@@ -185,7 +216,7 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
     }
 
     override fun toDetail(weatherItemDomain: DailyWeatherItemDomain?) {
-        val bundle =  Bundle()
+        val bundle = Bundle()
         bundle.putSerializable(ARG_DETAIL_WEATHER, weatherItemDomain)
         findNavController().navigate(R.id.action_homeFragment_to_detailFragment, bundle)
     }

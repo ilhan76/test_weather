@@ -98,7 +98,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shimmer_main_weather_icon"
+        app:layout_constraintTop_toBottomOf="@+id/main_weather_icon"
         tools:text="21 °C" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
