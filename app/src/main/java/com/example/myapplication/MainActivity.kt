@@ -47,14 +47,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
-
-/*    override fun onBackPressed() {
-        navController?.popBackStack()
-    }*/
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
