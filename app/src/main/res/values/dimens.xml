@@ -55,4 +55,36 @@
     <dimen name="shimmer_hourly_txt_temp_margin_horizontal">5dp</dimen>
     <dimen name="shimmer_hourly_txt_temp_margin_top">2dp</dimen>
     <!-- item daily-->
+
+    <!-- Detail -->
+    <dimen name="detail_txt_date_txt_size">24sp</dimen>
+    <dimen name="detail_txt_date_margin_top">30dp</dimen>
+    <dimen name="detail_icon_size">70dp</dimen>
+    <dimen name="detail_icon_margin_top">20dp</dimen>
+    <dimen name="detail_txt_temp_txt_size">55sp</dimen>
+    <dimen name="detail_flow_margin_horizontal">5dp</dimen>
+    <dimen name="detail_flow_margin_top">10dp</dimen>
+    <dimen name="detail_flow_horizontal_gap">10dp</dimen>
+    <dimen name="detail_flow_vertical_gap">10dp</dimen>
+    <dimen name="detail_txt_wind_margin_horizontal">10dp</dimen>
+    <dimen name="detail_flow_item_txt_size">16sp</dimen>
+    <dimen name="detail_txt_temp_title_margin_top">10dp</dimen>
+    <dimen name="detail_txt_temp_title_txt_size">18sp</dimen>
+    <dimen name="detail_flow_temp_margin_horizontal">5dp</dimen>
+    <dimen name="detail_flow_temp_margin_top">10dp</dimen>
+    <dimen name="detail_flow_temp_horizontal_gap">10dp</dimen>
+    <dimen name="detail_flow_temp_vertical_gap">10dp</dimen>
+    <dimen name="detail_temp_flow_elevation">10dp</dimen>
+    <dimen name="detail_temp_flow_padding">5dp</dimen>
+    <dimen name="detail_temp_flow_txt_size">16sp</dimen>
+    <dimen name="detail_txt_pop_title_margin_top">10dp</dimen>
+    <dimen name="detail_txt_pop_title_txt_size">18sp</dimen>
+    <dimen name="detail_precipitation_flow_margin_horizontal">5dp</dimen>
+    <dimen name="detail_precipitation_flow_margin_top">10dp</dimen>
+    <dimen name="detail_precipitation_flow_horizontal_gap">10dp</dimen>
+    <dimen name="detail_precipitation_flow_vertical_gap">10dp</dimen>
+    <dimen name="detail_precipitation_flow_item_elevation">10dp</dimen>
+    <dimen name="detail_precipitation_flow_item_padding">5dp</dimen>
+    <dimen name="detail_precipitation_flow_item_txt_size">16sp</dimen>
+    <!-- Detail -->
 </resources>

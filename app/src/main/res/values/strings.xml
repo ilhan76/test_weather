@@ -33,4 +33,8 @@
     <string name="choose_location_city_card_txt_desc_txt">clear sky</string>
     <string name="choose_location_city_card_city_txt">London</string>
     <!-- Choose Location-->
+
+    <!-- Detail -->
+    <string name="detail_txt_temp_title_temperature">Temperature</string>
+    <!-- Detail -->
 </resources>

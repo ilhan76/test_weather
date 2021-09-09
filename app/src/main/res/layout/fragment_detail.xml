@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_item_bg"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        android:layout_marginTop="30dp"
+        android:textSize="@dimen/detail_txt_date_txt_size"
+        android:layout_marginTop="@dimen/detail_txt_date_margin_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,9 +22,9 @@
 
     <ImageView
         android:id="@+id/main_weather_icon"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="@dimen/detail_icon_size"
+        android:layout_height="@dimen/detail_icon_size"
+        android:layout_marginTop="@dimen/detail_icon_margin_top"
         app:layout_constraintEnd_toStartOf="@+id/txt_main"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="55sp"
+        android:textSize="@dimen/detail_txt_temp_txt_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_weather_icon"
@@ -76,14 +76,14 @@
         android:id="@+id/flow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/detail_flow_margin_horizontal"
+        android:layout_marginTop="@dimen/detail_flow_margin_top"
         android:background="@drawable/shape_flow_bg"
         app:constraint_referenced_ids="txt_wind, txt_humidity, txt_dew_point, txt_pressure,
         txt_pop, txt_clouds"
         app:flow_firstHorizontalStyle="spread"
-        app:flow_horizontalGap="10dp"
-        app:flow_verticalGap="10dp"
+        app:flow_horizontalGap="@dimen/detail_flow_horizontal_gap"
+        app:flow_verticalGap="@dimen/detail_flow_vertical_gap"
         app:flow_wrapMode="chain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -93,9 +93,9 @@
         android:id="@+id/txt_wind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="@dimen/detail_txt_wind_margin_horizontal"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_flow_item_txt_size"
         tools:text="@string/wind_pattern" />
 
     <TextView
@@ -103,7 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_flow_item_txt_size"
         tools:text="@string/humidity_pattern" />
 
     <TextView
@@ -111,7 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_flow_item_txt_size"
         tools:text="@string/dew_point_pattern" />
 
     <TextView
@@ -119,7 +119,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_flow_item_txt_size"
         tools:text="@string/pressure_pattern" />
 
     <TextView
@@ -127,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_flow_item_txt_size"
         tools:text="@string/pop_pattern" />
 
     <TextView
@@ -135,17 +135,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_flow_item_txt_size"
         tools:text="@string/clouds_pattern" />
 
     <TextView
         android:id="@+id/txt_temp_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Temperature"
+        android:layout_marginTop="@dimen/detail_txt_temp_title_margin_top"
+        android:text="@string/detail_txt_temp_title_temperature"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="@dimen/detail_txt_temp_title_txt_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flow" />
@@ -154,13 +154,13 @@
         android:id="@+id/temp_flow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/detail_flow_temp_margin_horizontal"
+        android:layout_marginTop="@dimen/detail_flow_temp_margin_top"
         app:constraint_referenced_ids="txt_temp_morn, txt_temp_day,
          txt_temp_eve, txt_temp_night"
         app:flow_firstHorizontalStyle="spread"
-        app:flow_horizontalGap="10dp"
-        app:flow_verticalGap="10dp"
+        app:flow_horizontalGap="@dimen/detail_flow_temp_horizontal_gap"
+        app:flow_verticalGap="@dimen/detail_flow_temp_vertical_gap"
         app:flow_wrapMode="chain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -171,10 +171,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_item_bg"
-        android:elevation="10dp"
-        android:padding="5dp"
+        android:elevation="@dimen/detail_temp_flow_elevation"
+        android:padding="@dimen/detail_temp_flow_padding"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_temp_flow_txt_size"
         tools:text="@string/morning_temp_pattern" />
 
     <TextView
@@ -182,10 +182,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_item_bg"
-        android:elevation="10dp"
-        android:padding="5dp"
+        android:elevation="@dimen/detail_temp_flow_elevation"
+        android:padding="@dimen/detail_temp_flow_padding"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_temp_flow_txt_size"
         tools:text="@string/day_temp_pattern" />
 
     <TextView
@@ -193,10 +193,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_item_bg"
-        android:elevation="10dp"
-        android:padding="5dp"
+        android:elevation="@dimen/detail_temp_flow_elevation"
+        android:padding="@dimen/detail_temp_flow_padding"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_temp_flow_txt_size"
         tools:text="@string/evening_temp_pattern" />
 
     <TextView
@@ -204,20 +204,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_item_bg"
-        android:elevation="10dp"
-        android:padding="5dp"
+        android:elevation="@dimen/detail_temp_flow_elevation"
+        android:padding="@dimen/detail_temp_flow_padding"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_temp_flow_txt_size"
         tools:text="@string/night_temp_pattern" />
 
     <TextView
         android:id="@+id/txt_pop_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/detail_txt_pop_title_margin_top"
         android:text="@string/home_txt_pop_title"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="@dimen/detail_txt_pop_title_txt_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temp_flow" />
@@ -226,12 +226,12 @@
         android:id="@+id/precipitation_flow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/detail_precipitation_flow_margin_horizontal"
+        android:layout_marginTop="@dimen/detail_precipitation_flow_margin_top"
         app:constraint_referenced_ids="txt_rain_precipitation, txt_snow_precipitation"
         app:flow_firstHorizontalStyle="spread"
-        app:flow_horizontalGap="10dp"
-        app:flow_verticalGap="10dp"
+        app:flow_horizontalGap="@dimen/detail_precipitation_flow_horizontal_gap"
+        app:flow_verticalGap="@dimen/detail_precipitation_flow_vertical_gap"
         app:flow_wrapMode="chain"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -242,10 +242,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_item_bg"
-        android:elevation="10dp"
-        android:padding="5dp"
+        android:elevation="@dimen/detail_precipitation_flow_item_elevation"
+        android:padding="@dimen/detail_precipitation_flow_item_padding"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_precipitation_flow_item_txt_size"
         tools:text="@string/rain_pattern" />
 
     <TextView
@@ -253,10 +253,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_item_bg"
-        android:elevation="10dp"
-        android:padding="5dp"
+        android:elevation="@dimen/detail_precipitation_flow_item_elevation"
+        android:padding="@dimen/detail_precipitation_flow_item_padding"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/detail_precipitation_flow_item_txt_size"
         tools:text="@string/snow_pattern" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
