@@ -1,4 +1,4 @@
-package com.example.myapplication.util
+package com.example.myapplication.adapters.delegates
 
 import com.example.myapplication.data.domain.DailyWeatherItemDomain
 

@@ -170,6 +170,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_section_bottom_barrier" />
 
+<!--    <ImageButton
+        android:id="@+id/btn_use_geolocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_btn_location"
+        android:padding="2dp"
+        android:src="@drawable/ic_btn_use_geolocation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Use geolocation"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/btn_use_geolocation"
+        app:layout_constraintTop_toBottomOf="@+id/btn_use_geolocation"
+        android:textSize="12dp" />-->
+
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/flow"
         android:layout_width="0dp"

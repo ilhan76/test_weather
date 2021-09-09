@@ -1,12 +1,11 @@
 package com.example.myapplication.adapters.viewHolders
 
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.databinding.ItemDailyWeatherBinding
-import com.example.myapplication.util.RvDailyWeatherDelegate
+import com.example.myapplication.adapters.delegates.RvDailyWeatherDelegate
 
 class DailyWeatherViewHolder(
     private val binding: ItemDailyWeatherBinding,
