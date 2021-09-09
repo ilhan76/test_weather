@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.adapters.DailyWeatherAdapter
 import com.example.myapplication.adapters.HourlyWeatherAdapter
+import com.example.myapplication.adapters.delegates.RvDailyWeatherDelegate
 import com.example.myapplication.data.domain.CurrentWeatherDomain
 import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.data.domain.HourlyWeatherItemDomain
@@ -44,12 +45,8 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         init()
+        return binding.root
     }
 
     private fun init() {
@@ -66,30 +63,26 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         viewModel.hourlyWeatherLiveData.observe(viewLifecycleOwner, this::renderHourlyWeather)
         viewModel.dailyWeatherLiveData.observe(viewLifecycleOwner, this::renderDailyWeather)
 
+        initListeners()
+
+        update()
+    }
+
+    private fun initListeners(){
         binding.btnChangeLocation.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_chooseLocation)
         }
-
-        viewModel.loadCurrentWeather()
-        viewModel.loadHourlyWeather()
-        viewModel.loadDailyWeather()
     }
 
     private fun checkSelfPermission() {
         if (ActivityCompat.checkSelfPermission(
                 requireActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
                 requireActivity(),
                 Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+            ) == PackageManager.PERMISSION_GRANTED
         ) {
-            val permissions = arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-            ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
-        } else {
             locationManager?.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER,
                 0L,
@@ -99,14 +92,11 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
                     requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
                 val editor = pref.edit()
                 editor.apply {
-                    putString(PREF_ARG_FLAG, FLAG_GEOLOCATION)
                     putFloat(PREF_ARG_LAT_GEO, it.longitude.toFloat())
                     putFloat(PREF_ARG_LAT_GEO, it.latitude.toFloat())
                 }
                 editor.apply()
-                viewModel.loadCurrentWeather()
-                viewModel.loadHourlyWeather()
-                viewModel.loadDailyWeather()
+                update()
             }
         }
     }
@@ -181,6 +171,13 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         binding.shimmerRvNextDays.isVisible = false
         binding.rvNextDays.isVisible = true
         dailyAdapter.setList(weatherItems)
+    }
+
+    private fun update(){
+        val flag = arguments?.getString(GEO_FLAG) as String
+        viewModel.loadCurrentWeather(flag)
+        viewModel.loadHourlyWeather(flag)
+        viewModel.loadDailyWeather(flag)
     }
 
     override fun onResume() {

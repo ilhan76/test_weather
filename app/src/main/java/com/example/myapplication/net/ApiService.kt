@@ -57,6 +57,4 @@ interface ApiService {
         @Query("appid") appid: String,
         @Query("units") units: String
     ): DailyListWeatherResponse
-
-    // @GET("onecall?exclude=current,minutely,hourly,daily,alerts")
 }

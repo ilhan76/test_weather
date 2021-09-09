@@ -38,6 +38,22 @@
         app:layout_constraintStart_toEndOf="@+id/etxt_search"
         app:layout_constraintTop_toTopOf="@+id/etxt_search" />
 
+    <Button
+        android:id="@+id/btn_use_geolocation"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Use geolocation"
+        android:background="@drawable/shape_btn_location"
+        android:elevation="20dp"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/etxt_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/city_card"
         android:layout_width="0dp"

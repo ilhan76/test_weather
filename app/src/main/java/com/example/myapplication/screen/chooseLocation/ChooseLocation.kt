@@ -1,14 +1,17 @@
 package com.example.myapplication.screen.chooseLocation
 
+import android.Manifest
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.edit
+import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -31,17 +34,17 @@ class ChooseLocation : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentChooseLocationBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         init()
+        return binding.root
     }
 
     private fun init(){
         viewModel.cityLiveData.observe(viewLifecycleOwner, this::render)
 
+        initListeners()
+    }
+
+    private fun initListeners(){
         binding.btnSearch.setOnClickListener {
             if (binding.etxtSearch.text.toString().trim().isNotEmpty()){
                 viewModel.findCity(binding.etxtSearch.text.toString())
@@ -49,16 +52,32 @@ class ChooseLocation : Fragment() {
                 Toast.makeText(context, "Field cannot be empty", Toast.LENGTH_SHORT).show()
             }
         }
+
         binding.cityCard.setOnClickListener {
-            val pref: SharedPreferences = requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
-            val editor = pref.edit()
+            val bundle = Bundle()
+            bundle.putString(GEO_FLAG, FLAG_CITY)
+            findNavController().navigate(R.id.action_chooseLocation_to_homeFragment, bundle)
+        }
 
-            editor.apply {
-                putString(PREF_ARG_FLAG, FLAG_CITY)
+        binding.btnUseGeolocation.setOnClickListener {
+            if (ActivityCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                val permissions = arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+                ActivityCompat.requestPermissions(requireActivity(), permissions, 0)
+            } else {
+                val bundle = Bundle()
+                bundle.putString(GEO_FLAG, FLAG_GEOLOCATION)
+                findNavController().navigate(R.id.action_chooseLocation_to_homeFragment, bundle)
             }
-            editor.apply()
-
-            findNavController().navigate(R.id.action_chooseLocation_to_homeFragment)
         }
     }
 

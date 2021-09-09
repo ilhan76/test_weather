@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.adapters.viewHolders.DailyWeatherViewHolder
 import com.example.myapplication.data.domain.DailyWeatherItemDomain
 import com.example.myapplication.databinding.ItemDailyWeatherBinding
-import com.example.myapplication.util.RvDailyWeatherDelegate
+import com.example.myapplication.adapters.delegates.RvDailyWeatherDelegate
 
 class DailyWeatherAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
