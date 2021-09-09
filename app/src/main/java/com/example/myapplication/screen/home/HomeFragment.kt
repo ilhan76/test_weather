@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -47,20 +48,6 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         init()
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.apply {
-            shimmerTxtCityName.startShimmerAnimation()
-            shimmerMainWeatherIcon.startShimmerAnimation()
-            shimmerTxtMain.startShimmerAnimation()
-            shimmerTxtDescription.startShimmerAnimation()
-            shimmerTxtTemp.startShimmerAnimation()
-            shimmerTxtFeelsLike.startShimmerAnimation()
-            shimmerRvCurrentDay.startShimmerAnimation()
-            shimmerRvNextDays.startShimmerAnimation()
-        }
     }
 
     override fun onPause() {
@@ -102,7 +89,6 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         viewModel.dailyWeatherLiveData.observe(viewLifecycleOwner, this::renderDailyWeather)
 
         initListeners()
-        update()
     }
 
     private fun initListeners() {
@@ -133,59 +119,94 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
                     putFloat(PREF_ARG_LAT_GEO, it.latitude.toFloat())
                 }
                 editor.apply()
-                update()
+                viewModel.updatePage()
             }
         }
     }
 
-    private fun renderCityName(name: String){
-        binding.apply {
-            txtCityName.text = name
-            shimmerTxtCityName.stopShimmerAnimation()
-            shimmerTxtCityName.isVisible = false
-            txtCityName.isVisible = true
+    private fun renderCityName(state: FeatureState) {
+        when(state){
+            FeatureState.Default -> {
+                val flag = arguments?.getString(GEO_FLAG) as String
+                viewModel.loadCityName(flag)
+            }
+            is FeatureState.Error -> {
+                Toast.makeText(context, "Error ${state.error}", Toast.LENGTH_SHORT).show()
+            }
+            FeatureState.Loading -> {
+                binding.shimmerTxtCityName.startShimmerAnimation()
+            }
+            is FeatureState.Success<*> -> {
+                binding.apply {
+                    txtCityName.text = state.content as String
+                    shimmerTxtCityName.stopShimmerAnimation()
+                    shimmerTxtCityName.isVisible = false
+                    txtCityName.isVisible = true
+                }
+            }
         }
     }
 
-    private fun renderCurrentWeather(currentWeather: CurrentWeatherDomain) {
-        binding.apply {
-            Glide.with(requireContext())
-                .load(currentWeather.iconUrl)
-                .into(mainWeatherIcon)
+    private fun renderCurrentWeather(state: FeatureState) {
+        when (state) {
+            FeatureState.Default -> {
+                val flag = arguments?.getString(GEO_FLAG) as String
+                viewModel.loadCurrentWeather(flag)
+            }
+            is FeatureState.Error -> {
+                Toast.makeText(context, "Error ${state.error}", Toast.LENGTH_SHORT).show()
+            }
+            FeatureState.Loading -> {
+                binding.apply {
+                    shimmerMainWeatherIcon.startShimmerAnimation()
+                    shimmerTxtMain.startShimmerAnimation()
+                    shimmerTxtDescription.startShimmerAnimation()
+                    shimmerTxtTemp.startShimmerAnimation()
+                    shimmerTxtFeelsLike.startShimmerAnimation()
+                }
+            }
+            is FeatureState.Success<*> -> {
+                binding.apply {
+                    val currentWeather = state.content as CurrentWeatherDomain
+                    Glide.with(requireContext())
+                        .load(currentWeather.iconUrl)
+                        .into(mainWeatherIcon)
 
-            txtTemp.text = context?.getString(
-                R.string.degr_pattern,
-                currentWeather.temp
-            )
-            txtFeelsLike.text = context?.getString(
-                R.string.feels_like_pattern,
-                currentWeather.feelsLike.toString()
-            )
-            txtMain.text = currentWeather.main
-            txtDescription.text = currentWeather.description
+                    txtTemp.text = context?.getString(
+                        R.string.degr_pattern,
+                        currentWeather.temp
+                    )
+                    txtFeelsLike.text = context?.getString(
+                        R.string.feels_like_pattern,
+                        currentWeather.feelsLike.toString()
+                    )
+                    txtMain.text = currentWeather.main
+                    txtDescription.text = currentWeather.description
 
-            txtWind.text = context?.getString(
-                R.string.wind_pattern,
-                currentWeather.windSpeed
-            )
-            txtHumidity.text = context?.getString(
-                R.string.humidity_pattern,
-                currentWeather.humidity
-            )
-            txtUvIndex.text = context?.getString(
-                R.string.uv_index_pattern,
-                currentWeather.uvi.toString()
-            )
-            txtPressure.text = context?.getString(
-                R.string.pressure_pattern,
-                currentWeather.pressure.toString()
-            )
-            txtVisibility.text = context?.getString(
-                R.string.visibility_pattern,
-                currentWeather.visibility.toString()
-            )
+                    txtWind.text = context?.getString(
+                        R.string.wind_pattern,
+                        currentWeather.windSpeed
+                    )
+                    txtHumidity.text = context?.getString(
+                        R.string.humidity_pattern,
+                        currentWeather.humidity
+                    )
+                    txtUvIndex.text = context?.getString(
+                        R.string.uv_index_pattern,
+                        currentWeather.uvi.toString()
+                    )
+                    txtPressure.text = context?.getString(
+                        R.string.pressure_pattern,
+                        currentWeather.pressure.toString()
+                    )
+                    txtVisibility.text = context?.getString(
+                        R.string.visibility_pattern,
+                        currentWeather.visibility.toString()
+                    )
 
-            hideShimmerCurrentWeather()
+                    hideShimmerCurrentWeather()
+                }
+            }
         }
     }
 
@@ -205,27 +226,45 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         }
     }
 
-    private fun renderHourlyWeather(weatherItems: List<HourlyWeatherItemDomain>) {
-        binding.shimmerRvCurrentDay.stopShimmerAnimation()
-        binding.shimmerRvCurrentDay.isVisible = false
-        binding.rvCurrentDay.isVisible = true
-        hourlyAdapter.setList(weatherItems)
+    private fun renderHourlyWeather(state: FeatureState) = when (state) {
+        FeatureState.Default -> {
+            val flag = arguments?.getString(GEO_FLAG) as String
+            viewModel.loadHourlyWeather(flag)
+        }
+        is FeatureState.Error -> {
+            Toast.makeText(context, "Error ${state.error}", Toast.LENGTH_SHORT).show()
+        }
+        FeatureState.Loading -> {
+            binding.shimmerRvCurrentDay.startShimmerAnimation()
+            binding.shimmerRvCurrentDay.isVisible = true
+            binding.rvCurrentDay.isVisible = false
+        }
+        is FeatureState.Success<*> -> {
+            binding.shimmerRvCurrentDay.stopShimmerAnimation()
+            binding.shimmerRvCurrentDay.isVisible = false
+            binding.rvCurrentDay.isVisible = true
+            hourlyAdapter.setList(state.content as List<HourlyWeatherItemDomain>)
+        }
     }
 
-    private fun renderDailyWeather(weatherItems: List<DailyWeatherItemDomain>) {
-        binding.shimmerRvNextDays.stopShimmerAnimation()
-        binding.shimmerRvNextDays.isVisible = false
-        binding.rvNextDays.isVisible = true
-        dailyAdapter.setList(weatherItems)
-    }
-
-    private fun update() {
-        val flag = arguments?.getString(GEO_FLAG) as String
-        viewModel.apply {
-            loadCityName(flag)
-            loadCurrentWeather(flag)
-            loadHourlyWeather(flag)
-            loadDailyWeather(flag)
+    private fun renderDailyWeather(state: FeatureState) = when (state) {
+        FeatureState.Default -> {
+            val flag = arguments?.getString(GEO_FLAG) as String
+            viewModel.loadDailyWeather(flag)
+        }
+        is FeatureState.Error -> {
+            Toast.makeText(context, "Error ${state.error}", Toast.LENGTH_SHORT).show()
+        }
+        FeatureState.Loading -> {
+            binding.shimmerRvNextDays.startShimmerAnimation()
+            binding.shimmerRvNextDays.isVisible = true
+            binding.rvNextDays.isVisible = false
+        }
+        is FeatureState.Success<*> -> {
+            binding.shimmerRvNextDays.stopShimmerAnimation()
+            binding.shimmerRvNextDays.isVisible = false
+            binding.rvNextDays.isVisible = true
+            dailyAdapter.setList(state.content as List<DailyWeatherItemDomain>)
         }
     }
 
