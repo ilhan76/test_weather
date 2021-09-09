@@ -2,7 +2,6 @@
     <string name="app_name">Weather Forecast</string>
 
     <string name="degr_pattern">%d °C</string>
-
     <string name="feels_like_pattern">Feels like %s °C</string>
     <string name="wind_pattern">Wind: %dm/s</string>
     <string name="humidity_pattern">Humidity: %dPer</string>
@@ -13,16 +12,19 @@
     <string name="dew_point_pattern">Dew point: %d</string>
     <string name="pop_pattern">Probability of precipitation: %s</string>
     <string name="clouds_pattern">Clouds: %sPer</string>
-
-    <!-- Home Fragment-->
-    <string name="home_btn_change_location">Change Location</string>
-    <string name="home_txt_pop_title">Probability of precipitation</string>
     <string name="morning_temp_pattern">Morning: %d °C</string>
     <string name="day_temp_pattern">Day: %d °C</string>
     <string name="evening_temp_pattern">Evening: %d °C</string>
     <string name="night_temp_pattern">Night: %d °C</string>
     <string name="rain_pattern">Rain: %s</string>
     <string name="snow_pattern">Snow: %s</string>
+
+    <!-- Home Fragment-->
+    <string name="home_btn_change_location">Change Location</string>
+    <string name="home_txt_pop_title">Probability of precipitation</string>
+    <!-- Home Fragment-->
+
+    <!-- Choose Location-->
     <string name="choose_location_etxt_search_hint">London</string>
     <string name="choose_location_btn_search_txt">Search</string>
     <string name="choose_location_btn_geo_txt">Use geolocation</string>
@@ -30,5 +32,5 @@
     <string name="choose_location_city_card_txt_main_txt">Clear</string>
     <string name="choose_location_city_card_txt_desc_txt">clear sky</string>
     <string name="choose_location_city_card_city_txt">London</string>
-    <!-- Home Fragment-->
+    <!-- Choose Location-->
 </resources>

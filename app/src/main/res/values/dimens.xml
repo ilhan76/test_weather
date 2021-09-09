@@ -44,5 +44,15 @@
     <dimen name="item_daily_icon_margin_start">20dp</dimen>
     <dimen name="item_daily_ib_margin_end">10dp</dimen>
     <dimen name="shimmer_daily_txt_date_width">100dp</dimen>
+    <dimen name="item_hourly_margin_horisontal">5dp</dimen>
+    <dimen name="item_hourly_margin_vertical">10dp</dimen>
+    <dimen name="item_hourly_elevation">10dp</dimen>
+    <dimen name="item_hourly_padding">5dp</dimen>
+    <dimen name="item_hourly_time_txt_size">14sp</dimen>
+    <dimen name="item_hourly_icon_size">40dp</dimen>
+    <dimen name="item_hourly_txt_temp_txt_size">14sp</dimen>
+    <dimen name="shimmer_houlry_time_margin_bottom">2dp</dimen>
+    <dimen name="shimmer_hourly_txt_temp_margin_horizontal">5dp</dimen>
+    <dimen name="shimmer_hourly_txt_temp_margin_top">2dp</dimen>
     <!-- item daily-->
 </resources>
