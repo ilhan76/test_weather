@@ -15,10 +15,7 @@ class RemoteDatasourceImpl : RemoteDatasource {
         return try {
             Log.d(TAG, "getCityCoordinate: Remote")
             ApiService.create().getCityCoordinate(
-                cityName = cityName,
-                appid = BuildConfig.API_KEY,
-                language = "en",
-                units = "metric"
+                cityName = cityName
             )
         } catch (e: Exception) {
             Log.d(TAG, "getCityCoordinate: Error ${e.localizedMessage}")
@@ -34,10 +31,7 @@ class RemoteDatasourceImpl : RemoteDatasource {
             Log.d(TAG, "getCurrentWeather: Remote")
             ApiService.create().getCurrentWeather(
                 latitude = latitude,
-                longitude = longitude,
-                appid = BuildConfig.API_KEY,
-                language = "en",
-                units = "metric"
+                longitude = longitude
             )
         } catch (e: Exception) {
             Log.d(TAG, "getCurrentWeather: Error ${e.localizedMessage}")
@@ -53,10 +47,7 @@ class RemoteDatasourceImpl : RemoteDatasource {
             Log.d(TAG, "getHourlyListWeatherAsync: Remote")
             ApiService.create().getHourlyListWeather(
                 latitude = latitude,
-                longitude = longitude,
-                appid = BuildConfig.API_KEY/*"0b0f9f5b54968d5ad5c5788c304286f3"*/,
-                language = "en",
-                units = "metric"
+                longitude = longitude
             )
         } catch (e: Exception) {
             Log.d(TAG, "getHourlyListWeatherAsync: Error ${e.localizedMessage}")
@@ -72,10 +63,7 @@ class RemoteDatasourceImpl : RemoteDatasource {
             Log.d(TAG, "getDailyListWeather: Remote")
             ApiService.create().getDailyListWeather(
                 latitude = latitude,
-                longitude = longitude,
-                appid = BuildConfig.API_KEY,
-                language = "en",
-                units = "metric"
+                longitude = longitude
             )
         } catch (e: java.lang.Exception) {
             Log.d(TAG, "getDailyListWeather: Error ${e.localizedMessage}")

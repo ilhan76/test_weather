@@ -49,11 +49,46 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         return binding.root
     }
 
-    private fun init() {
-        Log.d(TAG, "init: Init")
+    override fun onResume() {
+        super.onResume()
+        binding.apply {
+            shimmerMainWeatherIcon.startShimmerAnimation()
+            shimmerTxtMain.startShimmerAnimation()
+            shimmerTxtDescription.startShimmerAnimation()
+            shimmerTxtTemp.startShimmerAnimation()
+            shimmerTxtFeelsLike.startShimmerAnimation()
+            shimmerRvCurrentDay.startShimmerAnimation()
+            shimmerRvNextDays.startShimmerAnimation()
+        }
+    }
 
+    override fun onPause() {
+        super.onPause()
+        binding.apply {
+            shimmerMainWeatherIcon.stopShimmerAnimation()
+            shimmerTxtMain.stopShimmerAnimation()
+            shimmerTxtDescription.stopShimmerAnimation()
+            shimmerTxtTemp.stopShimmerAnimation()
+            shimmerTxtFeelsLike.stopShimmerAnimation()
+            shimmerRvCurrentDay.stopShimmerAnimation()
+            shimmerRvNextDays.stopShimmerAnimation()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        locationManager = null
+        _binding = null
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         locationManager = requireContext().getSystemService(LOCATION_SERVICE) as LocationManager
         checkSelfPermission()
+    }
+
+    private fun init() {
+        Log.d(TAG, "init: Init")
 
         binding.rvCurrentDay.adapter = hourlyAdapter
         dailyAdapter.attachDelegate(this)
@@ -68,7 +103,7 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         update()
     }
 
-    private fun initListeners(){
+    private fun initListeners() {
         binding.btnChangeLocation.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_chooseLocation)
         }
@@ -173,43 +208,11 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
         dailyAdapter.setList(weatherItems)
     }
 
-    private fun update(){
+    private fun update() {
         val flag = arguments?.getString(GEO_FLAG) as String
         viewModel.loadCurrentWeather(flag)
         viewModel.loadHourlyWeather(flag)
         viewModel.loadDailyWeather(flag)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.apply {
-            shimmerMainWeatherIcon.startShimmerAnimation()
-            shimmerTxtMain.startShimmerAnimation()
-            shimmerTxtDescription.startShimmerAnimation()
-            shimmerTxtTemp.startShimmerAnimation()
-            shimmerTxtFeelsLike.startShimmerAnimation()
-            shimmerRvCurrentDay.startShimmerAnimation()
-            shimmerRvNextDays.startShimmerAnimation()
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        binding.apply {
-            shimmerMainWeatherIcon.stopShimmerAnimation()
-            shimmerTxtMain.stopShimmerAnimation()
-            shimmerTxtDescription.stopShimmerAnimation()
-            shimmerTxtTemp.stopShimmerAnimation()
-            shimmerTxtFeelsLike.stopShimmerAnimation()
-            shimmerRvCurrentDay.stopShimmerAnimation()
-            shimmerRvNextDays.stopShimmerAnimation()
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        locationManager = null
-        _binding = null
     }
 
     override fun toDetail(weatherItemDomain: DailyWeatherItemDomain?) {

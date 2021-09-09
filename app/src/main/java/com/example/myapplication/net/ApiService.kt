@@ -25,36 +25,24 @@ interface ApiService {
 
     @GET("weather")
     suspend fun getCityCoordinate(
-        @Query("q") cityName: String,
-        @Query("lang") language: String,
-        @Query("appid") appid: String,
-        @Query("units") units: String
+        @Query("q") cityName: String
     ): CityResponse
 
     @GET("onecall?exclude=minutely,hourly,daily,alerts")
     suspend fun getCurrentWeather(
         @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double,
-        @Query("lang") language: String,
-        @Query("appid") appid: String,
-        @Query("units") units: String
+        @Query("lon") longitude: Double
     ): CurrentWeatherResponse
 
     @GET("onecall?exclude=current,minutely,daily,alerts")
     suspend fun getHourlyListWeather(
         @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double,
-        @Query("lang") language: String,
-        @Query("appid") appid: String,
-        @Query("units") units: String
+        @Query("lon") longitude: Double
     ): HourlyListWeatherResponse
 
     @GET("onecall?exclude=current,minutely,hourly,alerts")
     suspend fun getDailyListWeather(
         @Query("lat") latitude: Double,
-        @Query("lon") longitude: Double,
-        @Query("lang") language: String,
-        @Query("appid") appid: String,
-        @Query("units") units: String
+        @Query("lon") longitude: Double
     ): DailyListWeatherResponse
 }
