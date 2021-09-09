@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txt_city_name"
+        android:layout_width="@dimen/home_txt_city_name_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/home_txt_city_name_margin_start"
+        android:layout_marginTop="@dimen/home_txt_city_name_margin_top"
+        android:textColor="@color/black"
+        android:textSize="@dimen/home_txt_city_name_txt_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_txt_city_name"
+        android:layout_width="@dimen/home_shimmer_txt_city_name_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/home_txt_city_name_margin_start"
+        android:layout_marginTop="@dimen/home_txt_city_name_margin_top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <ImageView
+        android:id="@+id/main_weather_icon"
+        android:layout_width="@dimen/home_main_icon_size"
+        android:layout_height="@dimen/home_main_icon_size"
+        android:layout_marginTop="@dimen/home_main_icon_margin_top"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/txt_main"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_main_weather_icon"
+        android:layout_width="@dimen/home_main_icon_size"
+        android:layout_height="@dimen/home_main_icon_size"
+        android:layout_marginTop="@dimen/home_main_icon_margin_top"
+        app:layout_constraintEnd_toStartOf="@+id/shimmer_txt_main"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <TextView
+        android:id="@+id/txt_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/txt_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/main_weather_icon"
+        app:layout_constraintTop_toTopOf="@+id/main_weather_icon"
+        tools:text="Clear" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_txt_main"
+        android:layout_width="@dimen/home_shimmer_txt_main_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/home_shimmer_txt_main_margin_start"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/shimmer_txt_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/shimmer_main_weather_icon"
+        app:layout_constraintTop_toTopOf="@+id/shimmer_main_weather_icon">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <TextView
+        android:id="@+id/txt_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/main_weather_icon"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@+id/txt_main"
+        app:layout_constraintTop_toBottomOf="@+id/txt_main"
+        tools:text="clear sky" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_txt_description"
+        android:layout_width="@dimen/home_shimmer_txt_desc_width"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/shimmer_main_weather_icon"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@+id/shimmer_txt_main"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_txt_main">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <TextView
+        android:id="@+id/txt_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/home_txt_temp_txt_size"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_weather_icon"
+        tools:text="21 °C" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_txt_temp"
+        android:layout_width="@dimen/home_shimmer_txt_temp_width"
+        android:layout_height="@dimen/home_shimmer_txt_temp_height"
+        android:layout_marginTop="@dimen/home_shimmer_txt_temp_margin_top"
+        android:textColor="@color/black"
+        android:textSize="@dimen/home_txt_temp_txt_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_main_weather_icon">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <TextView
+        android:id="@+id/txt_feels_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/txt_temp"
+        app:layout_constraintStart_toStartOf="@+id/txt_temp"
+        app:layout_constraintTop_toBottomOf="@+id/txt_temp"
+        tools:text="Feels like: 19 °C" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_txt_feels_like"
+        android:layout_width="@dimen/home_shimmer_txt_feels_like_wigth"
+        android:layout_height="@dimen/home_shimmer_txt_feels_like_height"
+        android:layout_marginTop="@dimen/home_shimmer_txt_feels_like_margin_top"
+        app:layout_constraintEnd_toEndOf="@+id/shimmer_txt_temp"
+        app:layout_constraintStart_toStartOf="@+id/shimmer_txt_temp"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_txt_temp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/shimmer_color" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/title_section_bottom_barrier"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="txt_main, txt_description, txt_temp,
+        txt_feels_like, main_weather_icon, shimmer_txt_main, shimmer_txt_description,
+        shimmer_txt_temp, shimmer_txt_feels_like, shimmer_main_weather_icon" />
+
+    <Button
+        android:id="@+id/btn_change_location"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/home_btn_change_height"
+        android:layout_marginTop="@dimen/home_btn_change_margin_top"
+        android:layout_marginBottom="@dimen/home_btn_change_margin_bottom"
+        android:background="@drawable/shape_btn_location"
+        android:paddingHorizontal="@dimen/home_btn_change_padding_horizontal"
+        android:text="@string/home_btn_change_location"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/home_btn_change_txt_size"
+        app:layout_constraintBottom_toTopOf="@+id/flow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_section_bottom_barrier" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/home_flow_margin_horizontal"
+        android:layout_marginTop="@dimen/home_flow_margin_top"
+        android:background="@drawable/shape_flow_bg"
+        app:constraint_referenced_ids="txt_wind, txt_humidity,
+         txt_uv_index, txt_pressure, txt_visibility"
+        app:flow_firstHorizontalStyle="spread"
+        app:flow_horizontalGap="@dimen/home_flow_horizontal_gap"
+        app:flow_verticalGap="@dimen/home_flow_vertical_gap"
+        app:flow_wrapMode="chain"
+        app:layout_constraintBottom_toTopOf="@+id/rv_current_day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_change_location" />
+
+    <TextView
+        android:id="@+id/txt_wind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/home_flow_item_txt_size"
+        tools:text="@string/wind_pattern" />
+
+    <TextView
+        android:id="@+id/txt_humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/home_flow_item_txt_size"
+        tools:text="@string/humidity_pattern" />
+
+    <TextView
+        android:id="@+id/txt_uv_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/home_flow_item_txt_size"
+        tools:text="@string/uv_index_pattern" />
+
+    <TextView
+        android:id="@+id/txt_pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/home_flow_item_txt_size"
+        tools:text="@string/pressure_pattern" />
+
+    <TextView
+        android:id="@+id/txt_visibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/home_flow_item_txt_size"
+        tools:text="@string/visibility_pattern" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_rv_current_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flow">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+            <include layout="@layout/shimmer_hourly_weather" />
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_current_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flow"
+        tools:listitem="@layout/item_hourly_weather" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_rv_next_days"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shimmer_rv_current_day">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_daily_weather" />
+
+            <include layout="@layout/shimmer_daily_weather" />
+
+            <include layout="@layout/shimmer_daily_weather" />
+
+            <include layout="@layout/shimmer_daily_weather" />
+
+            <include layout="@layout/shimmer_daily_weather" />
+
+            <include layout="@layout/shimmer_daily_weather" />
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_next_days"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_current_day"
+        tools:listitem="@layout/item_daily_weather" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
