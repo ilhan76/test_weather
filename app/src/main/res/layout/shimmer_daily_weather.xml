@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        android:orientation="horizontal"
         android:layout_marginVertical="5dp"
         android:background="@drawable/shape_item_bg"
         android:elevation="10dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,32 +20,32 @@
 
         <TextView
             android:id="@+id/txt_date"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_gravity="start|center"
+            android:layout_marginStart="10dp"
+            android:background="@color/shimmer_color"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="2021-08-04" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txt_temp"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_marginVertical="5dp"
             android:layout_marginEnd="10dp"
-            android:textColor="@color/black"
             android:layout_weight="10"
-            android:layout_gravity="center_vertical"
+            android:background="@color/shimmer_color"
             android:gravity="end"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/icon"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="22 / 15 °C" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/icon"
@@ -54,21 +54,21 @@
             android:layout_marginVertical="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="10dp"
+            android:background="@color/shimmer_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ibtn_to_detail"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageButton
             android:id="@+id/ibtn_to_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
             android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/ic_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
