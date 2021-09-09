@@ -1,6 +1,7 @@
 package com.example.myapplication.data.source.impl
 
 import android.util.Log
+import com.example.myapplication.BuildConfig
 import com.example.myapplication.data.source.RemoteDatasource
 import com.example.myapplication.net.ApiService
 import com.example.myapplication.net.response.CityResponse
@@ -15,7 +16,7 @@ class RemoteDatasourceImpl : RemoteDatasource {
             Log.d(TAG, "getCityCoordinate: Remote")
             ApiService.create().getCityCoordinate(
                 cityName = cityName,
-                appid = "0b0f9f5b54968d5ad5c5788c304286f3",
+                appid = BuildConfig.API_KEY,
                 language = "en",
                 units = "metric"
             )
@@ -34,7 +35,7 @@ class RemoteDatasourceImpl : RemoteDatasource {
             ApiService.create().getCurrentWeather(
                 latitude = latitude,
                 longitude = longitude,
-                appid = "0b0f9f5b54968d5ad5c5788c304286f3",
+                appid = BuildConfig.API_KEY,
                 language = "en",
                 units = "metric"
             )
@@ -53,7 +54,7 @@ class RemoteDatasourceImpl : RemoteDatasource {
             ApiService.create().getHourlyListWeather(
                 latitude = latitude,
                 longitude = longitude,
-                appid = "0b0f9f5b54968d5ad5c5788c304286f3",
+                appid = BuildConfig.API_KEY/*"0b0f9f5b54968d5ad5c5788c304286f3"*/,
                 language = "en",
                 units = "metric"
             )
@@ -72,7 +73,7 @@ class RemoteDatasourceImpl : RemoteDatasource {
             ApiService.create().getDailyListWeather(
                 latitude = latitude,
                 longitude = longitude,
-                appid = "0b0f9f5b54968d5ad5c5788c304286f3",
+                appid = BuildConfig.API_KEY,
                 language = "en",
                 units = "metric"
             )

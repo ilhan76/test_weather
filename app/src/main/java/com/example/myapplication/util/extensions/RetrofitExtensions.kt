@@ -1,4 +1,4 @@
-package com.example.myapplication.util
+package com.example.myapplication.util.extensions
 
 import com.example.myapplication.BuildConfig
 import okhttp3.OkHttpClient

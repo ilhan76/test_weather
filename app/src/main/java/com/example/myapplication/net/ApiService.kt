@@ -4,8 +4,8 @@ import com.example.myapplication.net.response.CityResponse
 import com.example.myapplication.net.response.CurrentWeatherResponse
 import com.example.myapplication.net.response.DailyListWeatherResponse
 import com.example.myapplication.net.response.HourlyListWeatherResponse
-import com.example.myapplication.util.addJsonConvertor
-import com.example.myapplication.util.setClient
+import com.example.myapplication.util.extensions.addJsonConvertor
+import com.example.myapplication.util.extensions.setClient
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
