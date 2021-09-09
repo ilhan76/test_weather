@@ -96,13 +96,11 @@ class ChooseLocation : Fragment() {
                 binding.progressBar.isVisible = false
                 binding.txtError.isVisible = true
                 binding.cityCard.isVisible = false
-                // todo show error
             }
             FeatureState.Loading -> {
                 binding.progressBar.isVisible = true
                 binding.txtError.isVisible = false
                 binding.cityCard.isVisible = false
-                // todo show loading
             }
             is FeatureState.Success<*> -> {
                 val cityDomain = state.content as CityDomain

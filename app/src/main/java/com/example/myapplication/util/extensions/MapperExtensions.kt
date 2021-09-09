@@ -51,7 +51,6 @@ fun DailyWeatherItemDto.toDomain() = DailyWeatherItemDomain(
     iconUrl = getImageUrl(weather.first().icon)
 )
 
-// todo - переделать
 fun CityResponse.toDomain() = CityDomain(
     lon = coord?.lon!!,
     lat = coord.lat,

@@ -23,13 +23,6 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-sealed class FeatureState {
-    object Loading : FeatureState()
-    object Default : FeatureState()
-    class Success<T>(val content: T) : FeatureState()
-    class Error(val error: String?) : FeatureState()
-}
-
 class HomeViewModel(private val context: Application) : AndroidViewModel(context) {
     private val TAG: String = this::class.java.simpleName
     private val repository: WeatherRepository = WeatherRepositoryImpl(
@@ -62,13 +55,6 @@ class HomeViewModel(private val context: Application) : AndroidViewModel(context
     }
 
     fun loadCityName(flag: String) {
-        Toast.makeText(context,
-            "${if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LAT, 0f)
-            .toDouble() else pref.getFloat(PREF_ARG_LAT_GEO, 0f).toDouble()}" +
-                    "\n" +
-                    "${if (flag == FLAG_CITY) pref.getFloat(PREF_ARG_LON, 0f).toDouble() else pref.getFloat(PREF_ARG_LON_GEO, 0f).toDouble()}",
-            Toast.LENGTH_SHORT).show()
-
         _cityNameLiveData.postValue(FeatureState.Loading)
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
