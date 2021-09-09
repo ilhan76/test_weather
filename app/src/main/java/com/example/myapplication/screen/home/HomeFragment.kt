@@ -93,6 +93,7 @@ class HomeFragment : Fragment(), RvDailyWeatherDelegate {
 
     private fun initListeners() {
         binding.btnChangeLocation.setOnClickListener {
+            // todo - fix
             findNavController().navigate(R.id.action_homeFragment_to_chooseLocation)
         }
     }

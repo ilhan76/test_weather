@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.data.domain.CityDomain
 import com.example.myapplication.databinding.FragmentChooseLocationBinding
+import com.example.myapplication.screen.home.FeatureState
 import com.example.myapplication.util.*
 import com.example.myapplication.util.PREF_ARG_LAT
 
@@ -84,26 +85,48 @@ class ChooseLocation : Fragment() {
         }
     }
 
-    private fun render(cityDomain: CityDomain) {
-        Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show()
-        binding.apply {
-            txtMain.text = cityDomain.main
-            txtDescription.text = cityDomain.description
-            txtCityName.text = cityDomain.name
+    private fun render(state: FeatureState) {
+        when(state){
+            FeatureState.Default -> {
+                binding.progressBar.isVisible = false
+                binding.txtError.isVisible = false
+                binding.cityCard.isVisible = false
+            }
+            is FeatureState.Error -> {
+                binding.progressBar.isVisible = false
+                binding.txtError.isVisible = true
+                binding.cityCard.isVisible = false
+                // todo show error
+            }
+            FeatureState.Loading -> {
+                binding.progressBar.isVisible = true
+                binding.txtError.isVisible = false
+                binding.cityCard.isVisible = false
+                // todo show loading
+            }
+            is FeatureState.Success<*> -> {
+                val cityDomain = state.content as CityDomain
+                binding.apply {
+                    txtMain.text = cityDomain.main
+                    txtDescription.text = cityDomain.description
+                    txtCityName.text = cityDomain.name
 
-            Glide.with(requireContext())
-                .load(cityDomain.icon)
-                .into(icon)
+                    Glide.with(requireContext())
+                        .load(cityDomain.icon)
+                        .into(icon)
 
-            cityCard.isVisible = true
+                    cityCard.isVisible = true
+                }
+                val pref: SharedPreferences = requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
+                val editor = pref.edit()
+
+                editor.apply {
+                    putFloat(PREF_ARG_LON, cityDomain.lon.toFloat())
+                    putFloat(PREF_ARG_LAT, cityDomain.lat.toFloat())
+                }
+                editor.apply()
+                binding.progressBar.isVisible = false
+            }
         }
-        val pref: SharedPreferences = requireActivity().getSharedPreferences(FILE_PREF_NAME, Context.MODE_PRIVATE)
-        val editor = pref.edit()
-
-        editor.apply {
-            putFloat(PREF_ARG_LON, cityDomain.lon.toFloat())
-            putFloat(PREF_ARG_LAT, cityDomain.lat.toFloat())
-        }
-        editor.apply()
     }
 }
